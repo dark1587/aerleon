@@ -1,6 +1,6 @@
 # Juniper EVO
 
-Renders ACLs for Junos EVO platform. The Junos EVO generator is built on the _[Juniper](juniper.md)_ generator. 
+Renders ACLs for Junos EVO platform. The Junos EVO generator is built on the _[Juniper](juniper.md)_ generator.
 
 ## Header Format
 
@@ -21,21 +21,10 @@ The following header options are specific to Juniper EVO, or work differently th
 
 | Option | Description | Notes |
 |---|---|---|
-| `ingress`, `egress` | Direction the filter is applied in. | **Required** for `inet6` and `mixed` filters; an error is raised without it. |
-| `physical`, `loopback` | Type of interface the filter is applied to. | Optional. Defaults to `physical`. |
+| `ingress`, `egress` | Direction the filter is applied in. | **Required** for `inet6` and `mixed` filters; an error is raised without it. Sets how IPv6 protocols are matched; see _[IPv6 protocol match](#ipv6-protocol-match)_. |
+| `physical`, `loopback` | Type of interface the filter is applied to. | Optional. Defaults to `physical`. Sets how IPv6 protocols are matched; see _[IPv6 protocol match](#ipv6-protocol-match)_. |
 
 For an example, see _[IPv6 loopback filter](#ipv6-loopback-filter)_.
-
-## IPv6 Protocol Match
-
-For Juniper EVO, the direction of the filter on an interface and the interface type determines the syntax to use; either `next-header` or `payload-protocol`. The syntax used for the extension headers and the payload header is summarized below.
-
-| Direction | Interface | Extension headers (hop-by-hop, fragment, routing) | Payload (tcp, udp, ah, esp, icmpv6) |
-|---|---|---|---|
-| Ingress | Physical | `next-header hop-by-hop`, `next-header fragment`, `next-header routing` | `payload-protocol <proto>` |
-| Ingress | Loopback | `payload-protocol 0`, `payload-protocol 44`, `payload-protocol 43` | `payload-protocol <proto>` |
-| Egress | Physical | `payload-protocol 0`, `payload-protocol 44`, `payload-protocol 43` | `payload-protocol <proto>` |
-| Egress | Loopback | `payload-protocol 0`, `payload-protocol 44`, `payload-protocol 43` | `payload-protocol <proto>` |
 
 ## Term Format
 
@@ -70,6 +59,25 @@ These options are included from the _[Juniper](juniper.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.evojcl` extension, so `sample.yaml` renders `sample.evojcl`.
+
+### Differences from Juniper
+
+| Area | Juniper | Juniper EVO |
+|---|---|---|
+| IPv6 `protocol` | `next-header` | `next-header` or `payload-protocol`, depending on the direction and interface type; see _[IPv6 protocol match](#ipv6-protocol-match)_ |
+| IPv6 `protocol-except` | `next-header-except` | `next-header-except` or `payload-protocol-except`, by the same rules |
+
+#### IPv6 protocol match
+
+In an `inet6` filter, and in the IPv6 half of a `mixed` filter, the keyword depends on the header's direction and interface type, and on whether the term matches an extension header:
+
+| Header | Hop-by-hop (`hopopt`) and fragment (`fragment`) | Other protocols |
+|---|---|---|
+| `ingress` (physical) | `next-header hop-by-hop`, `next-header fragment` | `payload-protocol <proto>` |
+| `ingress loopback` | `payload-protocol 0`, `payload-protocol 44` | `payload-protocol <proto>` |
+| `egress`, `egress loopback` | `payload-protocol 0`, `payload-protocol 44` | `payload-protocol <proto>` |
+
+On `ingress` (physical), a term that lists an extension header uses `next-header` for all of its protocols: `protocol: tcp hopopt` renders `next-header [ tcp hop-by-hop ];`. The routing header (`ipv6-route`) isn't treated as an extension header; see _[Known Issues](#known-issues)_.
 
 ### Examples
 
@@ -158,3 +166,12 @@ firewall {
     }
 }
 ```
+
+## Known Issues
+
+!!! bug "Known issues"
+    * **The routing header is matched as a payload protocol.** Only hop-by-hop and fragment are treated as extension headers, so `protocol: ipv6-route` always renders as `payload-protocol ipv6-route`, even on `ingress` (physical), where the other extension headers use `next-header`.
+
+These known issues are included from _[Juniper](juniper.md#known-issues)_:
+
+--8<-- "docs/reference/generators/juniper.md:known-issues"

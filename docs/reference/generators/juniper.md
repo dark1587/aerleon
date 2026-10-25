@@ -256,3 +256,12 @@ firewall {
     }
 }
 ```
+
+## Known Issues
+
+<!-- --8<-- [start:known-issues] -->
+
+!!! bug "Known issues"
+    * **`hopopt` fails in a `mixed` filter.** A term with `protocol: hopopt` fails with `Protocol(s) ['hop-by-hop'] are not supported`. The same term renders in an `inet` or `inet6` filter.
+
+<!-- --8<-- [end:known-issues] -->

@@ -106,3 +106,9 @@ firewall {
     }
 }
 ```
+
+## Known Issues
+
+These known issues are included from _[Juniper](juniper.md#known-issues)_:
+
+--8<-- "docs/reference/generators/juniper.md:known-issues"
