@@ -22,7 +22,7 @@ These header options are included from the _[OpenConfig](openconfig.md#header-fo
 These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on SONiC"
-    Like OpenConfig, SONiC doesn't support `platform`, `platform-exclude` or `verbatim`. A term that uses any of them raises an error.
+    Like OpenConfig, SONiC doesn't support `icmp-type`, `platform`, `platform-exclude` or `verbatim`. A term that uses any of them raises an error.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 

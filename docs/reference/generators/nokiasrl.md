@@ -37,10 +37,9 @@ Nokia SR Linux also reads:
 | Token | Description | Example | Notes |
 |---|---|---|---|
 | `destination-prefix` | Match a named prefix list under `acl match-list`. | `destination-prefix: DC-NETS` | Can't be combined with `destination-address`. |
+| `icmp-code` | ICMP codes to match. | `icmp-code: 3 4` | Requires exactly one `icmp-type`. |
 | `logging` | Log matching packets. | `logging: true` | Without `r24.3.2`, only allowed on `deny` terms (raises an error otherwise). |
 | `source-prefix` | Match a named prefix list under `acl match-list`. | `source-prefix: CORP-NETS` | Can't be combined with `source-address`. |
-
-The term name becomes the entry `description`, and `comment` becomes `_annotate_description` (max 255 characters). Entries get sequence IDs 5, 10, 15, …
 
 ## Actions
 
@@ -73,13 +72,24 @@ Nokia SR Linux inherits the OpenConfig generator logic to process Aerleon polici
 | Area | OpenConfig | Nokia SR Linux |
 |---|---|---|
 | Filter | One `acl-set` per filter, with `type` `ACL_IPV4`, `ACL_IPV6` or `ACL_MIXED` | One `ipv4-filter` and/or `ipv6-filter` per filter (`acl-filter` with `r24.3`); `mixed` renders both |
-| Matches | `ipv4.config.…`, `ipv6.config.…` and `transport.config.…` | `match.…`, e.g. `source-ip.prefix` and `destination-port.value` |
+| Matches | `ipv4.config.…`, `ipv6.config.…` and `transport.config.…` | `match.…`, e.g. `source-ip.prefix` and `destination-port.value`; with `r24.3.2`, nested under `match.ipv4`, `match.ipv6` or `match.transport` |
 | IPv6 protocol | `ipv6.config.protocol` | `match.next-header` |
+| `icmp-type`, `icmp-code` | Not supported (raises an error) | `match.icmp.type` and `match.icmp.code` (`match.icmp6` for IPv6), one entry per type; see _[ICMP types](#icmp-types)_ |
 | Actions | `forwarding-action`: `ACCEPT`, `DROP`, `REJECT` | `action`: `accept`, `drop`; `reject` isn't supported |
-| Term name and `comment` | Not rendered | `description` and `_annotate_description` |
+| Term name and `comment` | Not rendered | `description` and `_annotate_description` (max 255 characters) |
 | Repository tags | Not rendered | `_annotate` on each filter |
 | Sequence IDs | 5, 10, 15, …, carried on across filters | 5, 10, 15, …, restarting in each filter |
 | `tcp-established` | `"builtin-detail": "TCP_ESTABLISHED"` | <code>"tcp-flags": "ack&#124;rst"</code> |
+
+#### ICMP types
+
+Where an ICMP match goes depends on the filter's address family and the term's protocol:
+
+| Header | `protocol: icmp` | `protocol: icmpv6` |
+|---|---|---|
+| `inet` | `match.icmp` | Raises an error |
+| `inet6` | Raises an error | `match.icmp6` |
+| `mixed` | `match.icmp`, in the IPv4 filter only | `match.icmp6`, in the IPv6 filter only |
 
 ### Examples
 

@@ -42,7 +42,7 @@ Common tokens that some generators reject. Each generator page also lists the on
 | `destination-exclude` | aruba, cloudarmor, gcp_hf, nvueapi, windows_advfirewall, windows_ipsec |  |
 | `destination-port` | cloudarmor |  |
 | `expiration` | cloudarmor, gcp_hf |  |
-| `icmp-type` | aruba, cloudarmor, gce, gcp_hf, k8s, windows_ipsec | Silently ignored on nokiasrl, openconfig and sonic (known issue). On nftables, a single value crashes the generator (known issue). |
+| `icmp-type` | aruba, cloudarmor, gce, gcp_hf, k8s, openconfig, sonic, windows_ipsec | On nftables, a single value crashes the generator (known issue). |
 | `option` | cloudarmor, gce, gcp_hf, k8s |  |
 | `platform` | cloudarmor, nokiasrl, openconfig, sonic |  |
 | `platform-exclude` | cloudarmor, nokiasrl, openconfig, sonic |  |
