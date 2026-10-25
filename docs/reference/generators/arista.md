@@ -54,6 +54,15 @@ These options are included from the _[Cisco](cisco.md#option)_ page.
 
 Each policy file renders to one file with the same name and a `.eacl` extension, so `sample.yaml` renders `sample.eacl`.
 
+### Differences from Cisco
+
+| Area | Cisco | Arista |
+|---|---|---|
+| Access list line | `ip access-list extended NAME` | `ip access-list NAME` (also for `object-group`) |
+| IPv4 addresses | `10.0.0.0 0.0.0.255` | `10.0.0.0/24` |
+| Ports | Numbers, e.g. `eq 22` | Names where EOS has one, e.g. `eq ssh` |
+| Protocols | Names outside Cisco's short list (`tcp`, `udp`, `icmp`, `gre`, …) are rendered as numbers, e.g. `esp` → `50` | Rendered by name, as written in the policy, except `esp` (`50`) and `ah` (`51`) |
+
 ### Examples
 
 #### Sample policy

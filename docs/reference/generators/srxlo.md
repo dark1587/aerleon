@@ -1,6 +1,6 @@
 # SRXlo
 
-SRX Loopback renders a stateless Juniper firewall filter for an SRX loopback interface. It is built on the _[Juniper](juniper.md)_ generator and supports the same header options, tokens, actions and options, with the differences below.
+SRX Loopback renders a stateless Juniper firewall filter for an SRX loopback interface. The SRXlo generator is built on the _[Juniper](juniper.md)_ generator.
 
 ## Header Format
 
@@ -10,16 +10,6 @@ targets:
 ```
 
 All options work as described for _[Juniper](juniper.md)_.
-
-## Differences from Juniper
-
-| Area | Juniper | SRXlo |
-|---|---|---|
-| `flexible-match-range` | Supported | Not supported (MX/Trio only) |
-| `encapsulate` | Supported | Not supported |
-| `port-mirror` | Supported | Not supported |
-| ICMPv6 protocol name | `icmpv6` | `icmp6` |
-| File suffix | `.jcl` | `.jsl` |
 
 ## Term Format
 
@@ -57,6 +47,12 @@ These options are included from the _[Juniper](juniper.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.jsl` extension, so `sample.yaml` renders `sample.jsl`.
+
+### Differences from Juniper
+
+| Area | Juniper | SRXlo |
+|---|---|---|
+| ICMPv6 protocol name | `icmpv6` | `icmp6` |
 
 ### Examples
 

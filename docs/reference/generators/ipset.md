@@ -16,18 +16,6 @@ All options work as described for _[IpTables](iptables.md)_, except:
 | `exists` | Add `-exist` to the `create` and `add` commands, so re-running them doesn't fail. | ipset only. |
 | `nochainedterms` | — | Not accepted (raises an error). ipset never uses per-term chains anyway: rules always go directly in the filter's chain. |
 
-## Differences from IpTables
-
-When a term has more than one source or destination address, the addresses are put in an ipset instead of one rule per address. The output starts with the set commands, between `# begin:ipset-rules` and `# end:ipset-rules`, followed by the iptables rules.
-
-| Item | Format | Notes |
-|---|---|---|
-| Set name | `<term>-src`, `<term>-dst` | `-v6` is added for `inet6`. Names are cut to 31 characters. |
-| Set type | `hash:net` | `hashsize` and `maxelem` are sized to the number of addresses. |
-| Rule match | `-m set --match-set <set> src` (or `dst`) | A single address uses plain `-s`/`-d`. |
-| Exclusions | Applied before the set is built | The set only holds the remaining addresses. |
-| Chains | Rules go directly in the filter's chain | No `-N <term>` chain per term, unlike iptables. |
-
 ## Term Format
 
 ### Common tokens
@@ -61,6 +49,18 @@ These options are included from the _[IpTables](iptables.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.ips` extension, so `sample.yaml` renders `sample.ips`.
+
+### Differences from IpTables
+
+When a term has more than one source or destination address, the addresses are put in an ipset instead of one rule per address. The output starts with the set commands, between `# begin:ipset-rules` and `# end:ipset-rules`, followed by the iptables rules.
+
+| Item | Format | Notes |
+|---|---|---|
+| Set name | `<term>-src`, `<term>-dst` | `-v6` is added for `inet6`. Names are cut to 31 characters. |
+| Set type | `hash:net` | `hashsize` and `maxelem` are sized to the number of addresses. |
+| Rule match | `-m set --match-set <set> src` (or `dst`) | A single address uses plain `-s`/`-d`. |
+| Exclusions | Applied before the set is built | The set only holds the remaining addresses. |
+| Chains | Rules go directly in the filter's chain | No `-N <term>` chain per term, unlike iptables. |
 
 ### Examples
 

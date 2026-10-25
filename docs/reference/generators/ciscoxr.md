@@ -12,6 +12,7 @@ targets:
 | Option | Description | Notes |
 |---|---|---|
 | `filter name` | Name of the access list. | |
+| `standard` | — | Accepted, but the output isn't valid IOS XR; see _[Known Issues](#known-issues)_. |
 | `extended` | Render an IPv4 access list. | Default. Rendered as `ipv4 access-list`. |
 | `object-group` | Render an IPv4 access list that uses object-groups for ports and addresses. | |
 | `inet6` | Render an IPv6 access list. | |
@@ -62,6 +63,14 @@ These options are included from the _[Cisco](cisco.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.xacl` extension, so `sample.yaml` renders `sample.xacl`.
+
+### Differences from Cisco
+
+| Area | Cisco | CiscoXR |
+|---|---|---|
+| Access list line | `ip access-list extended NAME` | `ipv4 access-list NAME` |
+| Term with no protocol | `permit ip any any` | `permit ipv4 any any` |
+| Protocols | Names outside Cisco's short list (`tcp`, `udp`, `icmp`, `gre`, …) are rendered as numbers, e.g. `esp` → `50` | Rendered by name, as written in the policy |
 
 ### Examples
 
@@ -139,6 +148,9 @@ exit
 ```
 
 ## Known Issues
+
+!!! bug "Known issues"
+    * **`standard` lists mix IOS and IOS XR syntax.** `ciscoxr: 50 standard` renders an `ipv4 access-list 50` header followed by IOS-style `access-list 50 permit …` lines, which IOS XR doesn't accept.
 
 These known issues are included from _[Cisco](cisco.md#known-issues)_:
 

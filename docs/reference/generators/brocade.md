@@ -11,13 +11,6 @@ targets:
 
 All options work as described for _[Cisco](cisco.md)_.
 
-## Differences from Cisco
-
-| Area | Cisco | Brocade |
-|---|---|---|
-| Protocols | Rendered as numbers where possible | Rendered by name, as written in the policy |
-| Term name remark | Each term starts with `remark <term name>` | Not written; only the term's `comment` is |
-
 ## Term Format
 
 ### Common tokens
@@ -51,6 +44,13 @@ These options are included from the _[Cisco](cisco.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.bacl` extension, so `sample.yaml` renders `sample.bacl`.
+
+### Differences from Cisco
+
+| Area | Cisco | Brocade |
+|---|---|---|
+| Protocols | Names outside Cisco's short list (`tcp`, `udp`, `icmp`, `gre`, …) are rendered as numbers, e.g. `esp` → `50` | Rendered by name, as written in the policy |
+| Term name remark | Each term starts with `remark <term name>` | Not written in `extended` lists, or the IPv4 list of a `mixed` filter; see _[Known Issues](#known-issues)_ |
 
 ### Examples
 
@@ -86,6 +86,9 @@ exit
 ```
 
 ## Known Issues
+
+!!! bug "Known issues"
+    * **The term name remark is only dropped from IPv4 lists.** Brocade leaves out `remark <term name>` in `extended` lists, but `inet6` and `object-group` lists still write it, so one policy renders differently depending on the list type.
 
 These known issues are included from _[Cisco](cisco.md#known-issues)_:
 

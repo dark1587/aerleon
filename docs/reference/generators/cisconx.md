@@ -12,20 +12,13 @@ targets:
 | Option | Description | Notes |
 |---|---|---|
 | `filter name` | Name of the access list. | |
+| `standard` | — | Not accepted (raises an error). |
 | `extended` | Render an extended access list. | Default. |
 | `object-group` | Render an extended access list that uses object-groups for ports and addresses. | |
 | `inet6` | Render an IPv6-only access list. | |
 | `mixed` | Render an IPv4 list and an IPv6 list together. | |
 | `enable_dsmo` | Turn on discontinuous subnet mask summarization. | Optional. |
 | `noverbose` | Leave out extra term and address comments. | Optional. |
-
-## Differences from Cisco
-
-| Area | Cisco | CiscoNX |
-|---|---|---|
-| `standard` access lists | Supported | Not supported (raises an error) |
-| `extended` keyword in output | `ip access-list extended NAME` | `ip access-list NAME` |
-| Protocols | Rendered as numbers where possible | Rendered by name, as written in the policy |
 
 ## Term Format
 
@@ -60,6 +53,15 @@ These options are included from the _[Cisco](cisco.md#option)_ page.
 ## Output
 
 Each policy file renders to one file with the same name and a `.nxacl` extension, so `sample.yaml` renders `sample.nxacl`.
+
+### Differences from Cisco
+
+| Area | Cisco | CiscoNX |
+|---|---|---|
+| Access list line | `ip access-list extended NAME` | `ip access-list NAME` |
+| IPv4 addresses | `10.0.0.0 0.0.0.255`, `host 10.1.1.1` | `10.0.0.0/24`, `10.1.1.1/32` |
+| Protocols | Names outside Cisco's short list (`tcp`, `udp`, `icmp`, `gre`, …) are rendered as numbers, e.g. `esp` → `50` | Rendered by name, as written in the policy, except `vrrp` (`112`) |
+| Repository tags | `remark $Id:$` | `remark "$Date:$"` and `remark "$Revision:$"` |
 
 ### Examples
 
