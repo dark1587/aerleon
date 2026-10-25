@@ -1,20 +1,21 @@
 # SONiC
 
-Renders ACL sets for [SONiC](https://sonicfoundation.dev/) switches as JSON. The sonic generator is built on the [OpenConfig](openconfig.md) generator and supports exactly the same header options, tokens and actions. The only difference is how `tcp-established` is rendered.
-
-!!! info "Tables included from OpenConfig"
-    The shared tables under Term Format and Actions are included from the [OpenConfig](openconfig.md) page, so they always match it. Anything that differs on SONiC is called out on this page.
+Renders ACL sets for [SONiC](https://sonicfoundation.dev/) switches as JSON. The SONiC generator is built on the [OpenConfig](openconfig.md) generator.
 
 ## Header Format
-
-The SONiC header designation has the following format:
 
 ```yaml
 targets:
     sonic: [filter name] {inet|inet6|mixed}
 ```
 
-All options work as described for [OpenConfig](openconfig.md#header-format).
+| Option | Description | Notes |
+|---|---|---|
+| `filter name` | Name of the ACL set. | Rendered as `name` and `config.name`. If it's left out, both render as `null`. |
+| `inet` | IPv4 only. | Default. ACL type `ACL_IPV4`. |
+| `inet6` | IPv6 only. | ACL type `ACL_IPV6`. |
+| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see [Known Issues](#known-issues). |
+
 
 ## Term Format
 
@@ -183,4 +184,6 @@ filters:
 
 ## Known Issues
 
-SONiC has the same known issues as [OpenConfig](openconfig.md#known-issues).
+These known issues are included from [OpenConfig](openconfig.md#known-issues).
+
+--8<-- "docs/reference/generators/openconfig.md:known-issues"

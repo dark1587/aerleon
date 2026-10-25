@@ -4,8 +4,6 @@ Renders a Palo Alto Networks firewall configuration (security rules, address obj
 
 ## Header Format
 
-The PaloAltoFW header designation has the following format:
-
 ```yaml
 targets:
     paloalto: from-zone [zone name] to-zone [zone name] {inet|inet6|mixed} {addr-obj|no-addr-obj} {unique-term-prefixes}

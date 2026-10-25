@@ -1,13 +1,8 @@
 # CiscoNX
 
-The CiscoNX generator is built on the [Cisco](cisco.md) generator. It supports exactly the same tokens, actions and options. The differences are listed below.
-
-!!! info "Tables included from Cisco"
-    The shared tables under Term Format, Actions and Option are included from the [Cisco](cisco.md) page, so they always match it. Anything that differs on CiscoNX is called out on this page.
+Renders ACLs for Cisco NX platform. The CiscoNX generator is built on the [Cisco](cisco.md) generator.
 
 ## Header Format
-
-The CiscoNX header designation has the following format:
 
 ```yaml
 targets:

@@ -1,11 +1,11 @@
 # IpTables
 
+Renders IPTables commands.
+
 !!! note
-    IpTables produces output that must be passed, line by line, to the `iptables`/`ip6tables` command line. For `iptables-restore` compatible output, use the [Speedway](speedway.md) generator.
+    For `iptables-restore` compatible output, use the [Speedway](speedway.md) generator.
 
 ## Header Format
-
-The IpTables header designation has the following format:
 
 ```yaml
 targets:

@@ -4,8 +4,6 @@ Renders `netsh advfirewall firewall add rule …` commands.
 
 ## Header Format
 
-The Windows Advanced Firewall header designation has the following format:
-
 ```yaml
 targets:
     windows_advfirewall: [out|in] {inet|inet6}

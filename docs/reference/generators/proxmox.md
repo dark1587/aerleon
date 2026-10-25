@@ -4,8 +4,6 @@ Renders a Proxmox VE firewall configuration file (`[OPTIONS]` and `[RULES]` sect
 
 ## Header Format
 
-The Proxmox header designation has the following format:
-
 ```yaml
 targets:
    proxmox: [cluster|host|vm|vnet] [IN|OUT|FORWARD] {zone options}

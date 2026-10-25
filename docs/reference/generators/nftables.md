@@ -4,8 +4,6 @@ Renders an nftables ruleset for the `nft` command. Each term becomes its own cha
 
 ## Header Format
 
-The Nftables header designation has the following format:
-
 ```yaml
 targets:
     nftables: [inet|inet6|mixed] [input|output|forward] {ACCEPT} {priority} {noverbose}

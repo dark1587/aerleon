@@ -1,13 +1,8 @@
 # Arista
 
-The Arista generator is built on the [Cisco](cisco.md) generator, so its terms, actions and options work the same way.
-
-!!! info "Tables included from Cisco"
-    The shared tables under Term Format, Actions and Option are included from the [Cisco](cisco.md) page, so they always match it. Anything that differs on Arista is called out on this page.
+Renders Arista EOS ACLs. The Arista generator is built on the [Cisco](cisco.md) generator.
 
 ## Header Format
-
-The Arista header designation has the following format:
 
 ```yaml
 targets:

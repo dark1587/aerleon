@@ -2,12 +2,7 @@
 
 SRX Loopback renders a stateless Juniper firewall filter for an SRX loopback interface. It is built on the [Juniper](juniper.md) generator and supports the same header options, tokens, actions and options, with the differences below.
 
-!!! info "Tables included from Juniper"
-    The shared tables under Term Format, Actions and Option are included from the [Juniper](juniper.md) page, so they always match it. Anything that differs on SRXlo is called out on this page.
-
 ## Header Format
-
-The SRXlo header designation has the following format:
 
 ```yaml
 targets:

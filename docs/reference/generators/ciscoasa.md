@@ -4,8 +4,6 @@ Renders Cisco ASA access lists.
 
 ## Header Format
 
-The CiscoASA header designation has the following format:
-
 ```yaml
 targets:
     ciscoasa: [filter name] {enable_dsmo}

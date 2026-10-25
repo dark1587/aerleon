@@ -73,7 +73,7 @@ nav:
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Generators:
-      - reference/generators.md
+      - Generators Overview: reference/generators.md
       - Common: reference/generators/common.md
       - ICMP Types: reference/generators/icmp_types.md
       - Arista:
@@ -83,26 +83,26 @@ nav:
       - Brocade: reference/generators/brocade.md
       - Cisco:
         - Cisco: reference/generators/cisco.md
-        - CiscoASA: reference/generators/ciscoasa.md
-        - CiscoNX: reference/generators/cisconx.md
-        - CiscoXR: reference/generators/ciscoxr.md
+        - Cisco ASA: reference/generators/ciscoasa.md
+        - Cisco NX: reference/generators/cisconx.md
+        - Cisco XR: reference/generators/ciscoxr.md
       - Fortigate: reference/generators/fortigate.md
       - Google Cloud:
+        - Cloud Armor: reference/generators/cloudarmor.md
         - GCE: reference/generators/gce.md
         - GCP Hierarchical Firewall: reference/generators/gcp_hf.md
-        - Cloud Armor: reference/generators/cloudarmor.md
       - Juniper:
         - Juniper: reference/generators/juniper.md
         - Juniper EVO: reference/generators/juniperevo.md
         - Juniper MSMPC: reference/generators/msmpc.md
-        - JuniperSRX: reference/generators/srx.md
-        - SRXlo: reference/generators/srxlo.md
+        - Juniper SRX: reference/generators/srx.md
+        - Juniper SRX Loopback: reference/generators/srxlo.md
       - K8s: reference/generators/k8s.md
       - Linux:
-        - IpTables: reference/generators/iptables.md
-        - Ipset: reference/generators/ipset.md
+        - IPSet: reference/generators/ipset.md
+        - IPTables: reference/generators/iptables.md
+        - NFTables: reference/generators/nftables.md
         - Speedway: reference/generators/speedway.md
-        - Nftables: reference/generators/nftables.md
       - Nokia SR Linux: reference/generators/nokiasrl.md
       - NVUE API: reference/generators/nvueapi.md
       - OpenConfig: reference/generators/openconfig.md

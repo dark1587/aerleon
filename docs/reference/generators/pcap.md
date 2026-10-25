@@ -4,8 +4,6 @@ Renders a pcap/BPF filter expression (for `tcpdump`, Wireshark, etc.) that match
 
 ## Header Format
 
-The PcapFilter header designation has the following format:
-
 ```yaml
 targets:
     pcap: [filter name] {inet|inet6|mixed} {in|out}

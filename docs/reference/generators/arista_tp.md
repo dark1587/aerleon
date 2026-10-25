@@ -1,10 +1,8 @@
 # Arista Traffic-Policy
 
-Renders Arista EOS traffic-policies. See [Arista EOS: Support for traffic-policy on interfaces](https://eos.arista.com/eos-4-25-0f/support-for-traffic-policy-on-interfaces/).
+Renders Arista EOS traffic-policies.
 
 ## Header Format
-
-The Arista Traffic-Policy header designation has the following format:
 
 ```yaml
 targets:

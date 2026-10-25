@@ -4,8 +4,6 @@ Renders Google Compute Engine VPC firewall rules as JSON.
 
 ## Header Format
 
-The GCE header designation has the following format:
-
 ```yaml
 targets:
     gce: [network] {INGRESS|EGRESS} {inet|inet6|mixed} {max attribute count}

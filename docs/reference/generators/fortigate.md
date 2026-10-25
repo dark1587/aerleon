@@ -1,10 +1,8 @@
 # Fortigate
 
-Renders FortiOS firewall policies.
+Renders Fortigate firewall policies.
 
 ## Header Format
-
-The Fortigate header designation has the following format:
 
 ```yaml
 targets:
@@ -18,8 +16,6 @@ targets:
 | `inet` | IPv4 only. | |
 | `inet6` | IPv6 only. | |
 | `mixed` | IPv4 and IPv6. | Default. Not allowed with `local-in-policy`, which needs `inet` or `inet6`. |
-
-Only one address family can be given.
 
 ## Term Format
 

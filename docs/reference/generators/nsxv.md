@@ -4,8 +4,6 @@ Renders a VMware NSX-V distributed firewall section as XML.
 
 ## Header Format
 
-The NSXv header designation has the following format:
-
 ```yaml
 targets:
     nsxv: [section name] [inet|inet6|mixed] {section id} {securitygroup [securitygroupId]}

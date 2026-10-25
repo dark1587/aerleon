@@ -4,8 +4,6 @@ Renders Kubernetes `NetworkPolicy` resources as YAML, one policy per term, wrapp
 
 ## Header Format
 
-The K8s header designation has the following format:
-
 ```yaml
 targets:
     k8s: {INGRESS|EGRESS}

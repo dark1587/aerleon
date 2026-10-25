@@ -4,8 +4,6 @@ Renders a VMware NSX-T `SecurityPolicy` (category `Application`) as JSON.
 
 ## Header Format
 
-The NSXt header designation has the following format:
-
 ```yaml
 targets:
     nsxt: [section name] [inet|inet6|mixed] {section id} {securitygroup [securitygroupId]}

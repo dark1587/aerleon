@@ -4,8 +4,6 @@ Renders Nokia SR Linux ACL filters as JSON. It is built on the OpenConfig genera
 
 ## Header Format
 
-The Nokia SR Linux header designation has the following format:
-
 ```yaml
 targets:
     nokiasrl: [filter name] {inet|inet6|mixed} {stats} {r24.3|r24.3.2}
@@ -140,8 +138,6 @@ filters:
 
 ## Known Issues
 
-!!! bug "Known issues"
-    * **A term with no addresses of the family being rendered matches everything.** In a `mixed` filter, a term with only IPv4 sources also renders an IPv6 entry with no source address, so it matches all IPv6 sources. See [OpenConfig](openconfig.md).
-    * **`icmp-type` is silently ignored.** It is accepted, but not rendered, so a term meant to allow only `echo-request` allows all ICMP.
-    * Exclusions crash with mixed-family address tokens (`TypeError: … are not of the same version`), as in [GCE](gce.md).
-    * **An exclusion on only one side crashes the generator.** A term with `source-exclude` but no `destination-exclude`, or the reverse, fails with `TypeError: 'NoneType' object is not iterable`. See [OpenConfig](openconfig.md#known-issues).
+These known issues are included from [OpenConfig](openconfig.md#known-issues).
+
+--8<-- "docs/reference/generators/openconfig.md:known-issues"

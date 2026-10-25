@@ -1,16 +1,8 @@
 # Speedway
 
-!!! note
-    Speedway produces IpTables filtering output that is suitable for passing to the `iptables-restore` command.
-
-The Speedway generator is built on the [IpTables](iptables.md) generator. It supports exactly the same header options, tokens, actions and options. The differences are listed below.
-
-!!! info "Tables included from IpTables"
-    The shared tables under Term Format, Actions and Option are included from the [IpTables](iptables.md) page, so they always match it. Anything that differs on Speedway is called out on this page.
+Renders IPTables rules compatible with the `iptables-restore` command. The Speedway generator is built on the [IpTables](iptables.md) generator.
 
 ## Header Format
-
-The Speedway header designation has the following format:
 
 ```yaml
 targets:

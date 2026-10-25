@@ -4,8 +4,6 @@ Renders Junos MS-MPC service filters.
 
 ## Header Format
 
-The Juniper MSMPC header designation has the following format:
-
 ```yaml
 targets:
     msmpc: [filter name] {inet|inet6|mixed} {noverbose} {ingress|egress} {no-apply-groups}

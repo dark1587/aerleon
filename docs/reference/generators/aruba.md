@@ -4,8 +4,6 @@ Renders ArubaOS access lists.
 
 ## Header Format
 
-The Aruba header designation has the following format:
-
 ```yaml
 targets:
     aruba: [filter name] {inet6} {noverbose}

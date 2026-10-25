@@ -4,8 +4,6 @@ Renders JSON configuration for NVIDIA Cumulus Linux switches, in the NVUE (NVIDI
 
 ## Header Format
 
-The NVUE API header designation has the following format:
-
 ```yaml
 targets:
     nvueapi: [filter name] [ipv4|ipv6]

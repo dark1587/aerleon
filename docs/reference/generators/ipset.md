@@ -1,15 +1,8 @@
-# Ipset
+# IPSet
 
-Ipset is a system inside the Linux kernel, which can very efficiently store and match IPv4 and IPv6 addresses. This can be used to dramatically increase performance of iptables firewall.
-
-The Ipset generator is built on the [IpTables](iptables.md) generator. It supports exactly the same header options, tokens, actions and options. The differences are listed below.
-
-!!! info "Tables included from IpTables"
-    The shared tables under Term Format, Actions and Option are included from the [IpTables](iptables.md) page, so they always match it. Anything that differs on Ipset is called out on this page.
+Renders [IPSet](https://ipset.netfilter.org) rules. The IPSet generator is built on the [IpTables](iptables.md) generator.
 
 ## Header Format
-
-The Ipset header designation has the following format:
 
 ```yaml
 targets:
@@ -102,4 +95,4 @@ add allow-ssh-src 192.168.10.0/24
 
 ## Known Issues
 
-Ipset has the same known issues as [IpTables](iptables.md#known-issues).
+IPSet has the same known issues as [IpTables](iptables.md#known-issues).

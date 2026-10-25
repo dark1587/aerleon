@@ -4,8 +4,6 @@ Renders Cisco IOS access lists.
 
 ## Header Format
 
-The Cisco header designation has the following format:
-
 ```yaml
 targets:
     cisco: [filter name] {extended|standard|object-group|inet6|mixed} {enable_dsmo} {noverbose}

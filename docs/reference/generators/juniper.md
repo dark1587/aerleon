@@ -4,8 +4,6 @@ Renders Junos firewall filters.
 
 ## Header Format
 
-The Juniper header designation has the following format:
-
 ```yaml
 targets:
     juniper: [filter name] {inet|inet6|mixed|bridge|ethernet-switching} {enable_dsmo} {not-interface-specific} {filter_enhanced_mode} {noverbose} {ingress|egress} {physical|loopback}

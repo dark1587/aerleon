@@ -4,8 +4,6 @@ Renders a Google Cloud [hierarchical firewall policy](https://cloud.google.com/f
 
 ## Header Format
 
-The GCP Hierarchical Firewall header designation has the following format:
-
 ```yaml
 targets:
     gcp_hf: [policy name] {INGRESS|EGRESS} {inet|inet6|mixed} {beta|ga} {max cost}

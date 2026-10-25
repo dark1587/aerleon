@@ -4,8 +4,6 @@ Renders Juniper SRX security policies.
 
 ## Header Format
 
-The JuniperSRX header designation has the following format:
-
 ```yaml
 targets:
     srx: from-zone [zone name] to-zone [zone name] {inet|inet6|mixed} {address-book-global|address-book-zone} {expresspath} {noverbose}

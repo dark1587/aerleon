@@ -4,8 +4,6 @@ Renders Google Cloud Armor security policy rules as JSON. Cloud Armor rules here
 
 ## Header Format
 
-The Cloud Armor header designation has the following format:
-
 ```yaml
 targets:
     cloudarmor: {inet|inet6|mixed} {noverbose}

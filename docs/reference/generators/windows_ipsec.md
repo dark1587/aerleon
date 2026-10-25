@@ -7,8 +7,6 @@ Renders `netsh ipsec static add …` commands.
 
 ## Header Format
 
-The WindowsIPSec header designation has the following format:
-
 ```yaml
 targets:
     windows_ipsec: [filter name] {inet|inet6}

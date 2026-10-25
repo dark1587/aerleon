@@ -4,8 +4,6 @@ Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/m
 
 ## Header Format
 
-The OpenConfig header designation has the following format:
-
 ```yaml
 targets:
     openconfig: [filter name] {inet|inet6|mixed}
@@ -149,9 +147,13 @@ filters:
 
 ## Known Issues
 
+<!-- --8<-- [start:known-issues] -->
+
 !!! bug "Known issues"
     * **A term with no addresses of the family being rendered matches everything.** In a `mixed` filter, a term with only IPv4 sources also renders an IPv6 entry with no source address, so it matches all IPv6 sources. The same happens in an `inet6` filter. Aerleon should skip the entry instead.
     * **`icmp-type` is silently ignored.** It is accepted, but not rendered, so a term meant to allow only `echo-request` allows all ICMP.
     * Exclusions crash with mixed-family address tokens (`TypeError: … are not of the same version`), as in [GCE](gce.md).
     * Because `platform-exclude` raises an error, a shared policy that uses `platform-exclude` to skip a term on another vendor can't be rendered for OpenConfig at all.
     * **An exclusion on only one side crashes the generator.** A term with `source-exclude` but no `destination-exclude`, or the reverse, fails with `TypeError: 'NoneType' object is not iterable`. Exclusions only work when both sides have one.
+
+<!-- --8<-- [end:known-issues] -->
