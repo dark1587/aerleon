@@ -15,7 +15,7 @@ There is no filter name: the address family must come first and the hook second.
 |---|---|---|
 | `inet` | IPv4 only. | Renders `table ip filtering_policies`. |
 | `inet6` | IPv6 only. | Renders `table ip6 filtering_policies`. |
-| `mixed` | IPv4 and IPv6. | Renders `table inet filtering_policies`. Every rule is currently rendered twice; see [Known Issues](#known-issues). |
+| `mixed` | IPv4 and IPv6. | Renders `table inet filtering_policies`. Every rule is currently rendered twice; see _[Known Issues](#known-issues)_. |
 | `input`, `output`, `forward` | Netfilter hook for the base chain. | `forward` is for routed/transit traffic; pair it with `source-interface` / `destination-interface`. |
 | `ACCEPT` | Default policy `accept` for unmatched packets. | Without it the default policy is `drop`. Must be uppercase. |
 | `priority` | An integer: the base chain priority. | Optional. Defaults to `0`. Only one integer is allowed. |
@@ -96,7 +96,7 @@ _source:_ <https://www.netfilter.org/projects/nftables/manpage.html>
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on Nftables"
     Nftables doesn't support `verbatim`. A term that uses it raises an error.
@@ -128,7 +128,7 @@ Nftables also reads the following tokens.
 
 | Option | Description | Example | Notes |
 |---|---|---|---|
-| `established`, `tcp-established` | — | | The term is skipped with a warning. See [Stateful firewall only](#stateful-firewall-only). |
+| `established`, `tcp-established` | — | | The term is skipped with a warning. See _[Stateful firewall only](#stateful-firewall-only)_. |
 
 ## Output
 
@@ -138,7 +138,7 @@ Each policy file renders to one file with the same name and a `.nft` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

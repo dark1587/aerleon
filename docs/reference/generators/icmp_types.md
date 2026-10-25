@@ -1,6 +1,6 @@
 # ICMP Types
 
-These are the `icmp-type` names Aerleon accepts, with their type numbers. They come from `Term.ICMP_TYPE` in `aerleon/lib/aclgenerator.py`. Some generators rename them (see [Nftables](nftables.md#icmp-types)).
+These are the `icmp-type` names Aerleon accepts, with their type numbers. They come from `Term.ICMP_TYPE` in `aerleon/lib/aclgenerator.py`. Some generators rename them (see _[Nftables](nftables.md#icmp-types)_).
 
 ## IPv4
 

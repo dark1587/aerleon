@@ -3,7 +3,7 @@
 Renders IPTables commands.
 
 !!! note
-    For `iptables-restore` compatible output, use the [Speedway](speedway.md) generator.
+    For `iptables-restore` compatible output, use the _[Speedway](speedway.md)_ generator.
 
 ## Header Format
 
@@ -19,7 +19,7 @@ targets:
 | `ACCEPT`, `DROP` | Default policy for a built-in chain (`-P <chain> <policy>`). | `FORWARD` defaults to `DROP`. Other chains get no `-P` line unless one is given. |
 | `inet` | IPv4 only. | Default. |
 | `inet6` | IPv6 only. | |
-| `nostate` | Don't use connection tracking. | `established` then only works for TCP, using TCP flags. Leaks into later filters; see [Known Issues](#known-issues). |
+| `nostate` | Don't use connection tracking. | `established` then only works for TCP, using TCP flags. Leaks into later filters; see _[Known Issues](#known-issues)_. |
 | `abbreviateterms` | Shorten long term names using a built-in abbreviation table. | Names longer than 24 characters raise an error unless this or `truncateterms` is set. |
 | `truncateterms` | Cut long term names to 24 characters. | Applied after `abbreviateterms`. |
 | `noverbose` | Leave out term comments and owner. | |
@@ -29,7 +29,7 @@ targets:
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -45,7 +45,7 @@ The following tokens are specific to IpTables:
 | `destination-interface` | Match the outgoing interface. | `destination-interface: eth1` | Renders `-o eth1`. |
 | `fragment-offset` | Match fragment offset. | `fragment-offset: 1-8191` | Renders a `-m u32` match. |
 | `icmp-code` | ICMP code to match. | `icmp-code: 0` | |
-| `log-limit` | Rate-limit the log rule. | `log-limit: 10/minute` | Requires `logging`. Currently renders invalid syntax; see [Known Issues](iptables.md#known-issues). |
+| `log-limit` | Rate-limit the log rule. | `log-limit: 10/minute` | Requires `logging`. Currently renders invalid syntax; see _[Known Issues](iptables.md#known-issues)_. |
 | `logging` | Log matching packets. | `logging: true` | Adds a `-j LOG --log-prefix <term>` rule before the action rule. |
 | `owner` | Owner of the term, for record-keeping. | `owner: netops@example.com` | Added to the comment unless the header uses `noverbose`. |
 | `packet-length` | Match packet length. | `packet-length: 64-1500` | Renders `-m length --length 64:1500`. |
@@ -93,7 +93,7 @@ Each policy file renders to one file with the same name and **no extension**, so
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

@@ -30,7 +30,7 @@ The address family must come straight after the filter name. When `inet` or `ine
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -86,7 +86,7 @@ The following tokens are specific to Juniper.
 
 <!-- --8<-- [end:term-format] -->
 
-For an example, see [Prefix lists, policers and flexible match](#prefix-lists-policers-and-flexible-match).
+For an example, see _[Prefix lists, policers and flexible match](#prefix-lists-policers-and-flexible-match)_.
 
 ## Actions
 
@@ -130,7 +130,7 @@ Each policy file renders to one file with the same name and a `.jcl` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

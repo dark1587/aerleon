@@ -26,7 +26,7 @@ When `inet6` is specified, naming tokens that contain both IPv4 and IPv6 address
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -38,7 +38,7 @@ The following tokens are specific to Cisco:
 
 | Token | Description | Example | Notes |
 |---|---|---|---|
-| `address` | Address tokens for a `standard` ACL. | `address: INTERNAL` | Standard ACLs must use `address`; they reject `source-address`/`destination-address`. Extended and object-group ACLs ignore `address` without a warning; see [Known Issues](cisco.md#known-issues). |
+| `address` | Address tokens for a `standard` ACL. | `address: INTERNAL` | Standard ACLs must use `address`; they reject `source-address`/`destination-address`. Extended and object-group ACLs ignore `address` without a warning; see _[Known Issues](cisco.md#known-issues)_. |
 | `dscp-match` | Match a DSCP value. | `dscp-match: af41` | Only one value is allowed in extended ACLs. |
 | `icmp-code` | ICMP code to match. | `icmp-code: 0` | |
 | `logging` | Log matching packets. | `logging: true` | Adds `log` to the rule. |
@@ -47,7 +47,7 @@ The following tokens are specific to Cisco:
 
 <!-- --8<-- [end:term-format] -->
 
-For an example, see [Cisco tokens in a mixed filter](#cisco-tokens-in-a-mixed-filter).
+For an example, see _[Cisco tokens in a mixed filter](#cisco-tokens-in-a-mixed-filter)_.
 
 ## Actions
 
@@ -84,7 +84,7 @@ Each policy file renders to one file with the same name and a `.acl` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

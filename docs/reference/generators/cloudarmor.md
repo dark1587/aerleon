@@ -24,7 +24,7 @@ The address family must be the first option after `noverbose` is removed. Any ot
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on Cloud Armor"
     Cloud Armor only supports `name`, `comment`, `source-address` and `action`. Every other common token raises an error, including `destination-address`, `protocol`, the ports, exclusions, `option`, `expiration`, `platform`, `platform-exclude` and `verbatim`.
@@ -37,7 +37,7 @@ These tokens are included from the [Common](common.md) page.
 |---|---|---|
 | `comment` | `description` | Cut to 64 characters. Left out with `noverbose`. |
 | `name` | — | Not rendered. Use `comment` to identify the rule. |
-| `source-address` | `match.config.srcIpRanges` | Only addresses of the header's family. With no `source-address`, the rule matches everything (`"*"`). So does a term with no addresses of the header's family; see [Known Issues](#known-issues). |
+| `source-address` | `match.config.srcIpRanges` | Only addresses of the header's family. With no `source-address`, the rule matches everything (`"*"`). So does a term with no addresses of the header's family; see _[Known Issues](#known-issues)_. |
 
 * Rules are numbered by priority starting at 1, in term order.
 * A term with more than 5 source ranges is split into several rules with consecutive priorities, and the descriptions get a `[1/3]`, `[2/3]`, … suffix.
@@ -58,7 +58,7 @@ Each policy file renders to one file with the same name and a `.gca` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`. Cloud Armor only matches on source addresses, so `protocol` and `destination-port` are left out.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`. Cloud Armor only matches on source addresses, so `protocol` and `destination-port` are left out.
 
 ```yaml title="sample.yaml"
 filters:

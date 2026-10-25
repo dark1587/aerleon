@@ -24,7 +24,7 @@ Several headers are joined with `or`.
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on PcapFilter"
     PcapFilter doesn't support `verbatim`. A term that uses it raises an error.
@@ -69,7 +69,7 @@ Each policy file renders to `-accept.pcap` and `-deny.pcap` files, so `sample.ya
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by the Python API (`aerleon.api.Generate`).
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by the Python API (`aerleon.api.Generate`).
 
 ```yaml title="sample.yaml"
 filters:

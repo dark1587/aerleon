@@ -21,7 +21,7 @@ targets:
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -36,7 +36,7 @@ Fortigate also reads these tokens:
 
 Policy comments (owner plus `comment`) are cut to Fortigate's length limit, with a warning.
 
-For an example, see [Logging options](#logging-options).
+For an example, see _[Logging options](#logging-options)_.
 
 ## Actions
 
@@ -65,7 +65,7 @@ Each policy file renders to one file with the same name and a `.fgacl` extension
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

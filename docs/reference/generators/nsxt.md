@@ -22,10 +22,10 @@ Only one nsxt header is allowed per policy file; more raise `NsxtUnsupportedMany
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on NSXt"
-    Some common tokens are accepted but silently ignored; see [Known Issues](#known-issues).
+    Some common tokens are accepted but silently ignored; see _[Known Issues](#known-issues)_.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -60,7 +60,7 @@ Each policy file renders to one file with the same name and a `.nsxt` extension,
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

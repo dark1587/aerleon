@@ -29,7 +29,7 @@ The **cost** of a rule is its number of addresses, plus its number of protocols 
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on GCP Hierarchical Firewall"
     GCP Hierarchical Firewall doesn't support `source-port`, `icmp-type`, `option`, `source-exclude`, `destination-exclude`, `expiration` or `verbatim`. A term that uses any of them raises an error.
@@ -53,7 +53,7 @@ GCP Hierarchical Firewall also reads:
 | `INGRESS` | `source-address` | `srcIpRanges` |
 | `EGRESS` | `destination-address` | `destIpRanges` |
 
-The other address is ignored without a warning; see [Known Issues](#known-issues).
+The other address is ignored without a warning; see _[Known Issues](#known-issues)_.
 
 **Other behavior:**
 
@@ -80,7 +80,7 @@ Each policy file renders to one file with the same name and a `.gcphf` extension
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

@@ -1,6 +1,6 @@
 # Common
 
-These keys are accepted by every generator unless a generator's page says otherwise. The token table is also included on every generator page, and [Support by generator](#support-by-generator) lists the exceptions.
+These keys are accepted by every generator unless a generator's page says otherwise. The token table is also included on every generator page, and _[Support by generator](#support-by-generator)_ lists the exceptions.
 
 !!! note "Where these lists come from"
     Supported tokens are defined in code. The base set lives in `ACLGenerator._BuildTokens()` (`aerleon/lib/aclgenerator.py`), and each generator extends or trims it in its own `_BuildTokens()`. A term that uses a token outside that set is rejected with an `UnsupportedFilterError` (a few tokens, such as `counter`, `logging` and `owner`, only log a warning instead).
@@ -19,7 +19,7 @@ Every generator page includes this table at the start of its Term Format section
 | `destination-exclude` | Address tokens to remove from `destination-address`. | `destination-exclude: MAIL_SERVERS` |  |
 | `destination-port` | One or more destination service tokens. | `destination-port: HTTP HTTPS` |  |
 | `expiration` | Stop rendering the term after this date (`YYYY-MM-DD`). | `expiration: 2030-12-31` | Expired terms are skipped with a warning. Use `--exp_info` to be told about terms that expire soon. |
-| `icmp-type` | ICMP types to match. | `icmp-type: echo-request echo-reply` | See [ICMP Types](icmp_types.md) for valid values. |
+| `icmp-type` | ICMP types to match. | `icmp-type: echo-request echo-reply` | See _[ICMP Types](icmp_types.md)_ for valid values. |
 | `name` | Name of the term. | `name: accept-ssh` | Must be unique within a filter. Some platforms shorten long names. |
 | `option` | Extra match options. | `option: tcp-established` | Valid values are listed in each generator's Option table. |
 | `platform` | Render this term **only** for the listed targets. | `platform: juniper cisco` |  |
@@ -53,7 +53,7 @@ Common tokens that some generators reject. Each generator page also lists the on
 
 ## Example
 
-A term that uses most of the common keys, rendered by the [Juniper](juniper.md) generator. Because of `platform-exclude: gce`, the term would be left out of a `gce` filter.
+A term that uses most of the common keys, rendered by the _[Juniper](juniper.md)_ generator. Because of `platform-exclude: gce`, the term would be left out of a `gce` filter.
 
 ```yaml title="common.yaml"
 filters:

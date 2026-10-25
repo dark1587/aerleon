@@ -22,7 +22,7 @@ targets:
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on WindowsIPSec"
     WindowsIPSec doesn't support `icmp-type`, `source-exclude`, `destination-exclude` or `verbatim`. A term that uses any of them raises an error.
@@ -48,7 +48,7 @@ These tokens are included from the [Common](common.md) page.
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by calling `WindowsIPSec` directly:
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by calling `WindowsIPSec` directly:
 
 ```yaml title="sample.yaml"
 filters:

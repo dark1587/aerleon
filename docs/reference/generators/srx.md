@@ -27,7 +27,7 @@ Zone names can't be any of the option keywords above.
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on JuniperSRX"
     SRX is stateful, so terms that use `established`/`tcp-established` or are stateless replies are skipped with a warning. Other `option` values are accepted but ignored.
@@ -59,7 +59,7 @@ The following tokens are specific to JuniperSRX:
 | `true` | `log { session-close; }` | `log { session-init; }` |
 | `log-both` | `log { session-init; session-close; }` | `log { session-init; session-close; }` |
 
-For an example, see [Global policy](#global-policy).
+For an example, see _[Global policy](#global-policy)_.
 
 ## Actions
 
@@ -80,7 +80,7 @@ Each policy file renders to one file with the same name and a `.srx` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

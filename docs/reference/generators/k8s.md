@@ -18,7 +18,7 @@ targets:
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on K8s"
     K8s doesn't support `source-port`, `icmp-type`, `option` or `verbatim`. A term that uses any of them raises an error. K8s also only matches the protocols `tcp`, `udp` and `sctp`.
@@ -62,7 +62,7 @@ Each policy file renders to one file with the same name and a `.yml` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

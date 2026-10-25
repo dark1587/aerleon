@@ -16,13 +16,13 @@ targets:
 | `inet6` | IPv6 only. | |
 | `mixed` | IPv4 and IPv6. | |
 | `in`, `out` | Only match packets in this direction. | Default: both directions. |
-| `nostate` | Don't keep state (`no state`). | Default: `keep state`, with `flags S/SA` for TCP. Leaks into later filters; see [Known Issues](#known-issues). |
+| `nostate` | Don't keep state (`no state`). | Default: `keep state`, with `flags S/SA` for TCP. Leaks into later filters; see _[Known Issues](#known-issues)_. |
 
 ## Term Format
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
@@ -64,7 +64,7 @@ Each policy file renders to one file with the same name and a `.pf` extension, s
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

@@ -1,6 +1,6 @@
 # SONiC
 
-Renders ACL sets for [SONiC](https://sonicfoundation.dev/) switches as JSON. The SONiC generator is built on the [OpenConfig](openconfig.md) generator.
+Renders ACL sets for [SONiC](https://sonicfoundation.dev/) switches as JSON. The SONiC generator is built on the _[OpenConfig](openconfig.md)_ generator.
 
 ## Header Format
 
@@ -14,14 +14,14 @@ targets:
 | `filter name` | Name of the ACL set. | Rendered as `name` and `config.name`. If it's left out, both render as `null`. |
 | `inet` | IPv4 only. | Default. ACL type `ACL_IPV4`. |
 | `inet6` | IPv6 only. | ACL type `ACL_IPV6`. |
-| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see [Known Issues](#known-issues). |
+| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see _[Known Issues](#known-issues)_. |
 
 
 ## Term Format
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on SONiC"
     Like OpenConfig, SONiC doesn't support `platform`, `platform-exclude` or `verbatim`. A term that uses any of them raises an error.
@@ -30,7 +30,7 @@ These tokens are included from the [Common](common.md) page.
 
 ### Inherited tokens
 
-These tokens are included from the [OpenConfig](openconfig.md#how-tokens-are-rendered) page.
+These tokens are included from the _[OpenConfig](openconfig.md#how-tokens-are-rendered)_ page.
 
 --8<-- "docs/reference/generators/openconfig.md:term-format"
 
@@ -38,7 +38,7 @@ These tokens are included from the [OpenConfig](openconfig.md#how-tokens-are-ren
 
 ### Inherited actions
 
-These actions are included from the [OpenConfig](openconfig.md#actions) page.
+These actions are included from the _[OpenConfig](openconfig.md#actions)_ page.
 
 --8<-- "docs/reference/generators/openconfig.md:actions"
 
@@ -58,7 +58,7 @@ Each policy file renders to one file with the same name and a `.oacl` extension,
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:
@@ -133,7 +133,7 @@ filters:
 
 #### `tcp-established`
 
-A term with `option: tcp-established`. SONiC renders it as `tcp-session-established` (see [Option](#option)).
+A term with `option: tcp-established`. SONiC renders it as `tcp-session-established` (see _[Option](#option)_).
 
 ```yaml title="established.yaml"
 filters:
@@ -184,6 +184,6 @@ filters:
 
 ## Known Issues
 
-These known issues are included from [OpenConfig](openconfig.md#known-issues).
+These known issues are included from _[OpenConfig](openconfig.md#known-issues)_.
 
 --8<-- "docs/reference/generators/openconfig.md:known-issues"

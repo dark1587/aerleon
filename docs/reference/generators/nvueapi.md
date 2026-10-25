@@ -16,13 +16,13 @@ targets:
 | `ipv6` | IPv6 ACL. | `inet6` also works. |
 
 !!! warning "Not supported on NVUE API"
-    `mixed` and `mac` ACLs are not supported and raise an error. Use separate IPv4 and IPv6 ACLs. Always give the address family; see [Known Issues](#known-issues).
+    `mixed` and `mac` ACLs are not supported and raise an error. Use separate IPv4 and IPv6 ACLs. Always give the address family; see _[Known Issues](#known-issues)_.
 
 ## Term Format
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on NVUE API"
     NVUE API doesn't support `source-exclude`, `destination-exclude` or `verbatim`. A term that uses any of them raises an error.
@@ -66,7 +66,7 @@ Each policy file renders to one file with the same name and a `.nvueapi.json` ex
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

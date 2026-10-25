@@ -1,6 +1,6 @@
 # SRXlo
 
-SRX Loopback renders a stateless Juniper firewall filter for an SRX loopback interface. It is built on the [Juniper](juniper.md) generator and supports the same header options, tokens, actions and options, with the differences below.
+SRX Loopback renders a stateless Juniper firewall filter for an SRX loopback interface. It is built on the _[Juniper](juniper.md)_ generator and supports the same header options, tokens, actions and options, with the differences below.
 
 ## Header Format
 
@@ -9,7 +9,7 @@ targets:
     srxlo: [filter name] {inet|inet6|mixed|bridge|ethernet-switching} {enable_dsmo} {not-interface-specific} {filter_enhanced_mode} {noverbose} {ingress|egress} {physical|loopback}
 ```
 
-All options work as described for [Juniper](juniper.md).
+All options work as described for _[Juniper](juniper.md)_.
 
 ## Differences from Juniper
 
@@ -25,13 +25,13 @@ All options work as described for [Juniper](juniper.md).
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
 ### Inherited tokens
 
-These tokens are included from the [Juniper](juniper.md#juniper-tokens) page.
+These tokens are included from the _[Juniper](juniper.md#juniper-tokens)_ page.
 
 !!! warning "Not supported on SRXlo"
     `encapsulate`, `flexible-match-range` and `port-mirror` are listed in the Juniper table below, but SRXlo doesn't support them. A term that uses any of them raises an error.
@@ -42,7 +42,7 @@ These tokens are included from the [Juniper](juniper.md#juniper-tokens) page.
 
 ### Inherited actions
 
-These actions are included from the [Juniper](juniper.md#actions) page.
+These actions are included from the _[Juniper](juniper.md#actions)_ page.
 
 --8<-- "docs/reference/generators/juniper.md:actions"
 
@@ -50,7 +50,7 @@ These actions are included from the [Juniper](juniper.md#actions) page.
 
 ### Inherited options
 
-These options are included from the [Juniper](juniper.md#option) page.
+These options are included from the _[Juniper](juniper.md#option)_ page.
 
 --8<-- "docs/reference/generators/juniper.md:option"
 
@@ -62,7 +62,7 @@ Each policy file renders to one file with the same name and a `.jsl` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

@@ -26,7 +26,7 @@ Only one address family and one direction can be given. When `inet` or `inet6` i
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on Juniper MSMPC"
     MSMPC is stateful, so terms that use `established`/`tcp-established` or are stateless replies are skipped with a warning.
@@ -74,7 +74,7 @@ Each policy file renders to one file with the same name and a `.msmpc` extension
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

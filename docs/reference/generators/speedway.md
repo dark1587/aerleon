@@ -1,6 +1,6 @@
 # Speedway
 
-Renders IPTables rules compatible with the `iptables-restore` command. The Speedway generator is built on the [IpTables](iptables.md) generator.
+Renders IPTables rules compatible with the `iptables-restore` command. The Speedway generator is built on the _[IpTables](iptables.md)_ generator.
 
 ## Header Format
 
@@ -23,13 +23,13 @@ targets:
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
 ### Inherited tokens
 
-These tokens are included from the [IpTables](iptables.md#iptables-tokens) page.
+These tokens are included from the _[IpTables](iptables.md#iptables-tokens)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:term-format"
 
@@ -37,7 +37,7 @@ These tokens are included from the [IpTables](iptables.md#iptables-tokens) page.
 
 ### Inherited actions
 
-These actions are included from the [IpTables](iptables.md#actions) page.
+These actions are included from the _[IpTables](iptables.md#actions)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:actions"
 
@@ -45,7 +45,7 @@ These actions are included from the [IpTables](iptables.md#actions) page.
 
 ### Inherited options
 
-These options are included from the [IpTables](iptables.md#option) page.
+These options are included from the _[IpTables](iptables.md#option)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:option"
 
@@ -57,7 +57,7 @@ Each policy file renders to one file with the same name and a `.ipt` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:
@@ -88,4 +88,4 @@ COMMIT
 
 ## Known Issues
 
-Speedway has the same known issues as [IpTables](iptables.md#known-issues).
+Speedway has the same known issues as _[IpTables](iptables.md#known-issues)_.

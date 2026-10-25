@@ -26,7 +26,7 @@ The options are positional: to use `unique-term-prefixes` you must also give the
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on PaloAltoFW"
     PaloAltoFW doesn't support `verbatim`. A term that uses it raises an error.
@@ -39,7 +39,7 @@ PaloAltoFW also reads:
 
 | Token | Description | Example | Notes |
 |---|---|---|---|
-| `logging` | Log sessions. | `logging: true` | `true`, `syslog` or `local`: `log-end`. `log-both`: `log-start` and `log-end`. `disable`: both set to `no`. Without `logging`, neither is written and PAN-OS uses its default. See the [Logging](#logging) example. |
+| `logging` | Log sessions. | `logging: true` | `true`, `syslog` or `local`: `log-end`. `log-both`: `log-start` and `log-end`. `disable`: both set to `no`. Without `logging`, neither is written and PAN-OS uses its default. See the _[Logging](#logging)_ example. |
 | `owner`, `timeout` | — | | Accepted, but ignored. |
 | `pan-application` | Palo Alto applications to match. | `pan-application: ssl web-browsing` | Predefined applications (<https://applipedia.paloaltonetworks.com/>) or custom application objects. Only allowed with no `protocol`, or with `tcp`/`udp`. See the service table below. |
 | `profile-settings` | Security profile group(s) for the rule. | `profile-settings: default-profile` | Rendered as `profile-setting` → `group`. |
@@ -79,7 +79,7 @@ Each policy file renders to one file with the same name and a `.xml` extension, 
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:

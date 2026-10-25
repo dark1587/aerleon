@@ -1,6 +1,6 @@
 # Brocade
 
-Renders a Brocade switch ACL. The Brocade generator is built on the [Cisco](cisco.md) generator.
+Renders a Brocade switch ACL. The Brocade generator is built on the _[Cisco](cisco.md)_ generator.
 
 ## Header Format
 
@@ -9,7 +9,7 @@ targets:
     brocade: [filter name] {extended|standard|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
-All options work as described for [Cisco](cisco.md).
+All options work as described for _[Cisco](cisco.md)_.
 
 ## Differences from Cisco
 
@@ -22,13 +22,13 @@ All options work as described for [Cisco](cisco.md).
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
 ### Inherited tokens
 
-These tokens are included from the [Cisco](cisco.md#cisco-tokens) page.
+These tokens are included from the _[Cisco](cisco.md#cisco-tokens)_ page.
 
 --8<-- "docs/reference/generators/cisco.md:term-format"
 
@@ -36,7 +36,7 @@ These tokens are included from the [Cisco](cisco.md#cisco-tokens) page.
 
 ### Inherited actions
 
-These actions are included from the [Cisco](cisco.md#actions) page.
+These actions are included from the _[Cisco](cisco.md#actions)_ page.
 
 --8<-- "docs/reference/generators/cisco.md:actions"
 
@@ -44,7 +44,7 @@ These actions are included from the [Cisco](cisco.md#actions) page.
 
 ### Inherited options
 
-These options are included from the [Cisco](cisco.md#option) page.
+These options are included from the _[Cisco](cisco.md#option)_ page.
 
 --8<-- "docs/reference/generators/cisco.md:option"
 
@@ -56,7 +56,7 @@ Each policy file renders to one file with the same name and a `.bacl` extension,
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:
@@ -87,6 +87,6 @@ exit
 
 ## Known Issues
 
-These known issues are included from [Cisco](cisco.md#known-issues):
+These known issues are included from _[Cisco](cisco.md#known-issues)_:
 
 --8<-- "docs/reference/generators/cisco.md:known-issues"

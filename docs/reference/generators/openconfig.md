@@ -1,6 +1,6 @@
 # OpenConfig
 
-Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/models/schemadocs/yangdoc/openconfig-acl.html) as JSON. [SONiC](sonic.md) and [Nokia SR Linux](nokiasrl.md) are built on this generator.
+Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/models/schemadocs/yangdoc/openconfig-acl.html) as JSON. _[SONiC](sonic.md)_ and _[Nokia SR Linux](nokiasrl.md)_ are built on this generator.
 
 ## Header Format
 
@@ -14,7 +14,7 @@ targets:
 | `filter name` | Name of the ACL set. | Rendered as `name` and `config.name`. If it's left out, both render as `null`. |
 | `inet` | IPv4 only. | Default. ACL type `ACL_IPV4`. |
 | `inet6` | IPv6 only. | ACL type `ACL_IPV6`. |
-| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see [Known Issues](#known-issues). |
+| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see _[Known Issues](#known-issues)_. |
 
 Any other header option is silently ignored.
 
@@ -22,7 +22,7 @@ Any other header option is silently ignored.
 
 ### Common tokens
 
-These tokens are included from the [Common](common.md) page.
+These tokens are included from the _[Common](common.md)_ page.
 
 !!! warning "Not supported on OpenConfig"
     OpenConfig doesn't support `platform`, `platform-exclude` or `verbatim`. A term that uses any of them raises an error.
@@ -39,7 +39,7 @@ OpenConfig adds no tokens of its own.
 |---|---|---|
 | `comment` | — | Accepted, but not rendered. |
 | `protocol` | `ipv4.config.protocol` (or `ipv6.…`) | Always rendered as a number. A name Aerleon doesn't know raises `OcFirewallError`; use the number instead. |
-| `source-address`, `destination-address` | `ipv4.config.source-address` / `destination-address` (or `ipv6.…`) | Only addresses of the family being rendered are used. Exclusions are applied before rendering, but an exclusion on only one side crashes; see [Known Issues](openconfig.md#known-issues). |
+| `source-address`, `destination-address` | `ipv4.config.source-address` / `destination-address` (or `ipv6.…`) | Only addresses of the family being rendered are used. Exclusions are applied before rendering, but an exclusion on only one side crashes; see _[Known Issues](openconfig.md#known-issues)_. |
 | `source-port`, `destination-port` | `transport.config.source-port` / `destination-port` | A single port renders as a number, a range as `"start..end"`. |
 
 One ACL entry is written for every combination of source address, destination address, source port, destination port and protocol. Entries get sequence IDs 5, 10, 15, …, and the numbering carries on across filters in the same policy.
@@ -72,7 +72,7 @@ Each policy file renders to one file with the same name and a `.oacl` extension,
 
 #### Sample policy
 
-The [sample policy](../generators.md#sample-policy) used on every generator page, rendered by `aclgen`.
+The _[sample policy](../generators.md#sample-policy)_ used on every generator page, rendered by `aclgen`.
 
 ```yaml title="sample.yaml"
 filters:
@@ -152,7 +152,7 @@ filters:
 !!! bug "Known issues"
     * **A term with no addresses of the family being rendered matches everything.** In a `mixed` filter, a term with only IPv4 sources also renders an IPv6 entry with no source address, so it matches all IPv6 sources. The same happens in an `inet6` filter. Aerleon should skip the entry instead.
     * **`icmp-type` is silently ignored.** It is accepted, but not rendered, so a term meant to allow only `echo-request` allows all ICMP.
-    * Exclusions crash with mixed-family address tokens (`TypeError: … are not of the same version`), as in [GCE](gce.md).
+    * Exclusions crash with mixed-family address tokens (`TypeError: … are not of the same version`), as in _[GCE](gce.md)_.
     * Because `platform-exclude` raises an error, a shared policy that uses `platform-exclude` to skip a term on another vendor can't be rendered for OpenConfig at all.
     * **An exclusion on only one side crashes the generator.** A term with `source-exclude` but no `destination-exclude`, or the reverse, fails with `TypeError: 'NoneType' object is not iterable`. Exclusions only work when both sides have one.
 
