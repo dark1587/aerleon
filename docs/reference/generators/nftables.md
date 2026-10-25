@@ -21,14 +21,6 @@ There is no filter name: the address family must come first and the hook second.
 | `priority` | An integer: the base chain priority. | Optional. Defaults to `0`. Only one integer is allowed. |
 | `noverbose` | Leave out header and term comments. | Optional. |
 
-## Stateful firewall only
-
-This generator always builds a stateful ruleset using [conntrack](https://wiki.nftables.org/wiki-nftables/index.php/Matching_connection_tracking_stateful_metainformation):
-
-* Every base chain starts with `ct state established,related accept`, so return traffic is always allowed.
-* Every non-deny rule gets `ct state new`, so only new connections match. Invalid packets fall through to the default policy.
-* Terms that use `established` or `tcp-established`, and stateless reply terms, are skipped with a warning, because the base chain already allows return traffic.
-
 ## ICMP Types
 
 Some Aerleon ICMP type names are changed to the names nftables expects. Names with no nftables equivalent are passed through unchanged, and `nft` will reject them.
@@ -126,9 +118,12 @@ Nftables also reads the following tokens.
 
 ## Option
 
+!!! info "Stateful firewall"
+    Nftables tracks sessions, so return traffic is allowed without a separate term. Every base chain starts with `ct state established,related accept`, and every non-deny rule gets `ct state new`, using [conntrack](https://wiki.nftables.org/wiki-nftables/index.php/Matching_connection_tracking_stateful_metainformation). Invalid packets fall through to the default policy. Terms that use `established` or `tcp-established` are skipped with a warning. See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 | Option | Description | Example | Notes |
 |---|---|---|---|
-| `established`, `tcp-established` | — | | The term is skipped with a warning. See _[Stateful firewall only](#stateful-firewall-only)_. |
+| `established`, `tcp-established` | — | | The term is skipped with a warning. |
 
 ## Output
 

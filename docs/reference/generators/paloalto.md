@@ -67,9 +67,12 @@ PaloAltoFW also reads:
 
 ## Option
 
+!!! info "Stateful firewall"
+    PAN-OS tracks sessions, so return traffic is allowed without a separate term. Terms that use `established` or `tcp-established` are skipped with a warning. See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 | Option | Description | Example | Notes |
 |---|---|---|---|
-| `established`, `tcp-established` | — | | The term is skipped with a warning (the firewall is stateful). |
+| `established`, `tcp-established` | — | | The term is skipped with a warning. |
 
 ## Output
 

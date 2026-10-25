@@ -29,9 +29,6 @@ Zone names can't be any of the option keywords above.
 
 These tokens are included from the _[Common](common.md)_ page.
 
-!!! warning "Not supported on JuniperSRX"
-    SRX is stateful, so terms that use `established`/`tcp-established` or are stateless replies are skipped with a warning. Other `option` values are accepted but ignored.
-
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
 ### JuniperSRX tokens
@@ -71,6 +68,17 @@ For an example, see _[Global policy](#global-policy)_.
 | `dscp` | `dscp` | |
 | `log` | `log` | |
 | `reject` | `reject` | |
+
+## Option
+
+!!! info "Stateful firewall"
+    SRX tracks sessions, so return traffic is allowed without a separate term. Terms that use `established` or `tcp-established` are skipped with a warning. See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
+| Option | Description | Example | Notes |
+|---|---|---|---|
+| `established`, `tcp-established` | — | | The term is skipped with a warning. |
+
+Any other option value is accepted but ignored.
 
 ## Output
 

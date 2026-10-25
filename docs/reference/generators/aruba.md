@@ -45,6 +45,9 @@ Addresses are written into `netdestination` (or `netdestination6`) blocks named 
 
 ## Option
 
+!!! info "Stateful firewall"
+    ArubaOS tracks sessions, so return traffic is allowed without a separate term. `established` and `tcp-established` aren't supported: a term that uses them raises an error (`… contains unsupported keywords (established) …`). See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 | Option | Description | Example | Notes |
 |---|---|---|---|
 | `destination-is-user` | Use `user` as the destination instead of an address. | `option: destination-is-user` | `destination-address` is ignored. |

@@ -59,6 +59,9 @@ The following tokens are specific to Proxmox:
 
 ## Option
 
+!!! info "Stateful firewall"
+    The Proxmox VE firewall tracks sessions, so return traffic is allowed without a separate term. `established` and `tcp-established` aren't supported: a term that uses them raises an error (`… contains unsupported keywords (established) …`). See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 Options set the log level used when the term has `logging`.
 
 | Option | Description | Example | Notes |

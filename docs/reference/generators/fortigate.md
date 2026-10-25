@@ -49,6 +49,9 @@ Other actions are rejected.
 
 ## Option
 
+!!! info "Stateful firewall"
+    FortiOS tracks sessions, so return traffic is allowed without a separate term. `established` and `tcp-established` aren't supported: a term that uses them raises an error (`… contains unsupported keywords (established) …`). See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 Options only take effect when the term also sets `logging`.
 
 | Option | Description | Example | Notes |

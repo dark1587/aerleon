@@ -45,9 +45,12 @@ These tokens are included from the _[Common](common.md)_ page.
 
 ## Option
 
+!!! info "Stateful firewall"
+    Windows Firewall tracks sessions, so return traffic is allowed without a separate term. Terms that use `established` or `tcp-established` are skipped **without** a warning; see _[Known Issues](#known-issues)_. See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 | Option | Description | Example | Notes |
 |---|---|---|---|
-| `established`, `tcp-established` | — | | The term is skipped, without a warning. |
+| `established`, `tcp-established` | — | | The term is skipped, **without** a warning. |
 
 Any other option value is accepted but ignored, which makes the rule broader than intended (e.g. `option: syn` still allows all TCP).
 
@@ -78,3 +81,8 @@ filters:
 netsh advfirewall firewall add rule name=i_allow-ssh enable=yes interfacetype=any dir=in remoteip=10.0.0.0/24,192.168.10.0/24 localip=any localport=22 protocol=tcp action=allow
 netsh advfirewall firewall add rule name=i_default-deny enable=yes interfacetype=any dir=in remoteip=any localip=any protocol=any action=block
 ```
+
+## Known Issues
+
+!!! bug "Known issues"
+    * **`established` and `tcp-established` terms are dropped silently.** The term is left out of the output with no warning or error, so nothing in the `aclgen` log shows that a rule from the policy is missing.

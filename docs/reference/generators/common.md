@@ -51,6 +51,22 @@ Common tokens that some generators reject. Each generator page also lists the on
 | `source-port` | aruba, cloudarmor, gce, gcp_hf, k8s |  |
 | `verbatim` | cloudarmor, gce, gcp_hf, k8s, nftables, nokiasrl, nvueapi, openconfig, paloalto, pcap, sonic, windows_advfirewall, windows_ipsec |  |
 
+## Stateful firewalls
+
+These generators render for platforms that track sessions, so reply traffic is allowed by the session the request created. A term that matches replies with `option: established` or `option: tcp-established` isn't needed, and isn't rendered:
+
+| Generator | `established`, `tcp-established` |
+|---|---|
+| _[Aruba](aruba.md)_ | Raises an error. |
+| _[Fortigate](fortigate.md)_ | Raises an error. |
+| _[Juniper MSMPC](msmpc.md)_ | The term is skipped with a warning. |
+| _[JuniperSRX](srx.md)_ | The term is skipped with a warning. |
+| _[Nftables](nftables.md)_ | The term is skipped with a warning. |
+| _[NSXv](nsxv.md)_ | The term is skipped **without** a warning (known issue). |
+| _[PaloAltoFW](paloalto.md)_ | The term is skipped with a warning. |
+| _[Proxmox](proxmox.md)_ | Raises an error. |
+| _[Windows Advanced Firewall](windows_advfirewall.md)_ | The term is skipped **without** a warning (known issue). |
+
 ## Example
 
 A term that uses most of the common keys, rendered by the _[Juniper](juniper.md)_ generator. Because of `platform-exclude: gce`, the term would be left out of a `gce` filter.

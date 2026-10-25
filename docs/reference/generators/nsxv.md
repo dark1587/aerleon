@@ -50,6 +50,9 @@ NSXv also reads:
 
 ## Option
 
+!!! info "Stateful firewall"
+    NSX-V tracks sessions, so return traffic is allowed without a separate term. Terms that use `established` or `tcp-established` are skipped **without** a warning; see _[Known Issues](#known-issues)_. See _[Stateful firewalls](common.md#stateful-firewalls)_.
+
 | Option | Description | Example | Notes |
 |---|---|---|---|
 | `established`, `tcp-established` | — | | The term is skipped, **without** a warning. |
@@ -109,3 +112,8 @@ $Revision:$
   </rule>
 </section>
 ```
+
+## Known Issues
+
+!!! bug "Known issues"
+    * **`established` and `tcp-established` terms are dropped silently.** The term is left out of the output with no warning or error, so nothing in the `aclgen` log shows that a rule from the policy is missing.
