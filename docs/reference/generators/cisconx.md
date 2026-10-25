@@ -9,16 +9,14 @@ targets:
     cisconx: [filter name] {extended|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
-| Option | Description | Notes |
-|---|---|---|
-| `filter name` | Name of the access list. | |
-| `standard` | — | Not accepted (raises an error). |
-| `extended` | Render an extended access list. | Default. |
-| `object-group` | Render an extended access list that uses object-groups for ports and addresses. | |
-| `inet6` | Render an IPv6-only access list. | |
-| `mixed` | Render an IPv4 list and an IPv6 list together. | |
-| `enable_dsmo` | Turn on discontinuous subnet mask summarization. | Optional. |
-| `noverbose` | Leave out extra term and address comments. | Optional. |
+### Inherited header options
+
+These header options are included from the _[Cisco](cisco.md#header-format)_ page.
+
+!!! warning "Not supported on CiscoNX"
+    `standard` is listed in the Cisco table below, but CiscoNX doesn't support it. A filter that uses it raises an error.
+
+--8<-- "docs/reference/generators/cisco.md:header-options"
 
 ## Term Format
 

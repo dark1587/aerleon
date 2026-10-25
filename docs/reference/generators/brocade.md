@@ -9,7 +9,11 @@ targets:
     brocade: [filter name] {extended|standard|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
-All options work as described for _[Cisco](cisco.md)_.
+### Inherited header options
+
+These header options are included from the _[Cisco](cisco.md#header-format)_ page.
+
+--8<-- "docs/reference/generators/cisco.md:header-options"
 
 ## Term Format
 

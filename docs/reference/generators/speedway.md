@@ -1,6 +1,6 @@
 # Speedway
 
-Renders IPTables rules compatible with the `iptables-restore` command. The Speedway generator is built on the _[IpTables](iptables.md)_ generator.
+Renders iptables rules compatible with the `iptables-restore` command. The Speedway generator is built on the _[Iptables](iptables.md)_ generator.
 
 ## Header Format
 
@@ -9,11 +9,19 @@ targets:
     speedway: [INPUT|OUTPUT|FORWARD|custom] {ACCEPT|DROP} {inet|inet6} {nostate} {abbreviateterms} {truncateterms} {noverbose} {nochainedterms}
 ```
 
-All options work as described for _[IpTables](iptables.md)_, except:
+### Inherited header options
+
+These header options are included from the _[Iptables](iptables.md#header-format)_ page.
+
+--8<-- "docs/reference/generators/iptables.md:header-options"
+
+### Speedway header options
+
+The following header options are specific to Speedway, or work differently than on Iptables:
 
 | Option | Description | Notes |
 |---|---|---|
-| `ACCEPT`, `DROP` | Default policy for a built-in chain (`:<chain> <policy> [0:0]`). | Defaults to `DROP` for every built-in chain. IpTables only defaults `FORWARD`. |
+| `ACCEPT`, `DROP` | Default policy for a built-in chain (`:<chain> <policy> [0:0]`). | Defaults to `DROP` for every built-in chain. Iptables only defaults `FORWARD`. |
 
 ## Term Format
 
@@ -25,7 +33,7 @@ These tokens are included from the _[Common](common.md)_ page.
 
 ### Inherited tokens
 
-These tokens are included from the _[IpTables](iptables.md#iptables-tokens)_ page.
+These tokens are included from the _[Iptables](iptables.md#iptables-tokens)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:term-format"
 
@@ -33,7 +41,7 @@ These tokens are included from the _[IpTables](iptables.md#iptables-tokens)_ pag
 
 ### Inherited actions
 
-These actions are included from the _[IpTables](iptables.md#actions)_ page.
+These actions are included from the _[Iptables](iptables.md#actions)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:actions"
 
@@ -41,7 +49,7 @@ These actions are included from the _[IpTables](iptables.md#actions)_ page.
 
 ### Inherited options
 
-These options are included from the _[IpTables](iptables.md#option)_ page.
+These options are included from the _[Iptables](iptables.md#option)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:option"
 
@@ -49,9 +57,9 @@ These options are included from the _[IpTables](iptables.md#option)_ page.
 
 Each policy file renders to one file with the same name and a `.ipt` extension, so `sample.yaml` renders `sample.ipt`.
 
-### Differences from IpTables
+### Differences from Iptables
 
-| Area | IpTables | Speedway |
+| Area | Iptables | Speedway |
 |---|---|---|
 | Output format | One `iptables` command per line | `iptables-restore` format, wrapped in `*filter` … `COMMIT` |
 | Default policy line | `-P INPUT ACCEPT` | `:INPUT ACCEPT [0:0]` |
@@ -92,4 +100,6 @@ COMMIT
 
 ## Known Issues
 
-Speedway has the same known issues as _[IpTables](iptables.md#known-issues)_.
+These known issues are included from _[Iptables](iptables.md#known-issues)_:
+
+--8<-- "docs/reference/generators/iptables.md:known-issues"

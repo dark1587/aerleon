@@ -9,6 +9,8 @@ targets:
     juniper: [filter name] {inet|inet6|mixed|bridge|ethernet-switching} {enable_dsmo} {not-interface-specific} {filter_enhanced_mode} {noverbose} {ingress|egress} {physical|loopback}
 ```
 
+<!-- --8<-- [start:header-options] -->
+
 | Option | Description | Notes |
 |---|---|---|
 | `filter name` | Name of the firewall filter. | |
@@ -25,6 +27,8 @@ targets:
 | `physical`, `loopback` | Type of interface the filter is applied to. | Optional. Used by subclasses such as Juniper EVO. |
 
 The address family must come straight after the filter name. When `inet` or `inet6` is specified, naming tokens that contain both IPv4 and IPv6 addresses are rendered using only the matching addresses.
+
+<!-- --8<-- [end:header-options] -->
 
 ## Term Format
 

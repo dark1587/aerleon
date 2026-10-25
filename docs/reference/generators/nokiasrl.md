@@ -1,6 +1,6 @@
 # Nokia SR Linux
 
-Renders Nokia SR Linux ACL filters as JSON. It is built on the OpenConfig generator.
+Renders Nokia SR Linux ACL filters as JSON. The Nokia SR Linux generator is built on the _[OpenConfig](openconfig.md)_ generator.
 
 ## Header Format
 
@@ -65,6 +65,21 @@ Options that set `tcp-flags` also set the protocol to TCP.
 ## Output
 
 Each policy file renders to one file with the same name and a `.srl_acl` extension, so `sample.yaml` renders `sample.srl_acl`.
+
+### Differences from OpenConfig
+
+Nokia SR Linux inherits the OpenConfig generator logic to process Aerleon policies. Everything written into an entry is its own:
+
+| Area | OpenConfig | Nokia SR Linux |
+|---|---|---|
+| Filter | One `acl-set` per filter, with `type` `ACL_IPV4`, `ACL_IPV6` or `ACL_MIXED` | One `ipv4-filter` and/or `ipv6-filter` per filter (`acl-filter` with `r24.3`); `mixed` renders both |
+| Matches | `ipv4.config.…`, `ipv6.config.…` and `transport.config.…` | `match.…`, e.g. `source-ip.prefix` and `destination-port.value` |
+| IPv6 protocol | `ipv6.config.protocol` | `match.next-header` |
+| Actions | `forwarding-action`: `ACCEPT`, `DROP`, `REJECT` | `action`: `accept`, `drop`; `reject` isn't supported |
+| Term name and `comment` | Not rendered | `description` and `_annotate_description` |
+| Repository tags | Not rendered | `_annotate` on each filter |
+| Sequence IDs | 5, 10, 15, …, carried on across filters | 5, 10, 15, …, restarting in each filter |
+| `tcp-established` | `"builtin-detail": "TCP_ESTABLISHED"` | <code>"tcp-flags": "ack&#124;rst"</code> |
 
 ### Examples
 

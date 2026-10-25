@@ -9,16 +9,14 @@ targets:
     ciscoxr: [filter name] {extended|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
-| Option | Description | Notes |
-|---|---|---|
-| `filter name` | Name of the access list. | |
-| `standard` | — | Accepted, but the output isn't valid IOS XR; see _[Known Issues](#known-issues)_. |
-| `extended` | Render an IPv4 access list. | Default. Rendered as `ipv4 access-list`. |
-| `object-group` | Render an IPv4 access list that uses object-groups for ports and addresses. | |
-| `inet6` | Render an IPv6 access list. | |
-| `mixed` | Render an IPv4 list and an IPv6 list together. | |
-| `enable_dsmo` | Turn on discontinuous subnet mask summarization. | Optional. |
-| `noverbose` | Leave out extra term and address comments. | Optional. |
+### Inherited header options
+
+These header options are included from the _[Cisco](cisco.md#header-format)_ page.
+
+!!! warning "Not supported on CiscoXR"
+    `standard` is listed in the Cisco table below, but CiscoXR doesn't support it. It is accepted, but the output isn't valid IOS XR; see _[Known Issues](#known-issues)_.
+
+--8<-- "docs/reference/generators/cisco.md:header-options"
 
 ## Term Format
 

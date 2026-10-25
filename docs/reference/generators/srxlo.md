@@ -9,7 +9,11 @@ targets:
     srxlo: [filter name] {inet|inet6|mixed|bridge|ethernet-switching} {enable_dsmo} {not-interface-specific} {filter_enhanced_mode} {noverbose} {ingress|egress} {physical|loopback}
 ```
 
-All options work as described for _[Juniper](juniper.md)_.
+### Inherited header options
+
+These header options are included from the _[Juniper](juniper.md#header-format)_ page.
+
+--8<-- "docs/reference/generators/juniper.md:header-options"
 
 ## Term Format
 

@@ -53,8 +53,8 @@ Address families are listed as they are written in the header. The default is in
 | [Fortigate](generators/fortigate.md) | `fortigate` | FortiOS firewall policies | `inet`, `inet6`, **`mixed`** | `.fgacl` | |
 | [GCE](generators/gce.md) | `gce` | Google Compute Engine VPC firewall rules (JSON) | **`inet`**, `inet6`, `mixed` | `.gce` | |
 | [GCP Hierarchical Firewall](generators/gcp_hf.md) | `gcp_hf` | Google Cloud hierarchical firewall policies (JSON) | **`inet`**, `inet6`, `mixed` | `.gcphf` | |
-| [Ipset](generators/ipset.md) | `ipset` | iptables rules backed by ipset sets | **`inet`**, `inet6` | `.ips` | IpTables |
-| [IpTables](generators/iptables.md) | `iptables` | `iptables-restore` rules | **`inet`**, `inet6` | none | |
+| [Ipset](generators/ipset.md) | `ipset` | iptables rules backed by ipset sets | **`inet`**, `inet6` | `.ips` | Iptables |
+| [Iptables](generators/iptables.md) | `iptables` | `iptables-restore` rules | **`inet`**, `inet6` | none | |
 | [Juniper](generators/juniper.md) | `juniper` | Junos firewall filters | **`inet`**, `inet6`, `mixed`, `bridge`, `ethernet-switching` | `.jcl` | |
 | [Juniper EVO](generators/juniperevo.md) | `juniperevo` | Junos EVO firewall filters | as Juniper | `.evojcl` | Juniper |
 | [Juniper MSMPC](generators/msmpc.md) | `msmpc` | Junos MS-MPC service filters | `inet`, `inet6`, **`mixed`** | `.msmpc` | |
@@ -71,7 +71,7 @@ Address families are listed as they are written in the header. The default is in
 | [PcapFilter](generators/pcap.md) | `pcap` | pcap/BPF filter expressions | `inet`, `inet6`, **`mixed`** | `.pcap` | |
 | [Proxmox](generators/proxmox.md) | `proxmox` | Proxmox VE firewall files | Both | `.prxmxfw` | |
 | [SONiC](generators/sonic.md) | `sonic` | SONiC ACL sets (JSON) | **`inet`**, `inet6`, `mixed` | `.oacl` | OpenConfig |
-| [Speedway](generators/speedway.md) | `speedway` | `iptables-restore` rules | **`inet`**, `inet6` | `.ipt` | IpTables |
+| [Speedway](generators/speedway.md) | `speedway` | `iptables-restore` rules | **`inet`**, `inet6` | `.ipt` | Iptables |
 | [SRXlo](generators/srxlo.md) | `srxlo` | Junos filters for SRX loopbacks | as Juniper | `.jsl` | Juniper |
 | [Windows Advanced Firewall](generators/windows_advfirewall.md) | `windows_advfirewall` | `netsh advfirewall` commands | **`inet`**, `inet6` | `.bat` | |
 | [WindowsIPSec](generators/windows_ipsec.md) | `windows_ipsec` | `netsh ipsec` commands. **Not available:** the generator isn't registered. | **`inet`**, `inet6` | `.bat` | |

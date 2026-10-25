@@ -9,6 +9,8 @@ targets:
     cisco: [filter name] {extended|standard|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
+<!-- --8<-- [start:header-options] -->
+
 | Option | Description | Notes |
 |---|---|---|
 | `filter name` | Name or number of the access list. | |
@@ -21,6 +23,8 @@ targets:
 | `noverbose` | Leave out extra term and address comments. | Optional. |
 
 When `inet6` is specified, naming tokens that contain both IPv4 and IPv6 addresses are rendered using only the IPv6 addresses. Otherwise only IPv4 addresses are used, unless the filter is `mixed`.
+
+<!-- --8<-- [end:header-options] -->
 
 ## Term Format
 

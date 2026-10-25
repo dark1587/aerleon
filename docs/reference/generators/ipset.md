@@ -1,6 +1,6 @@
 # IPSet
 
-Renders [IPSet](https://ipset.netfilter.org) rules. The IPSet generator is built on the _[IpTables](iptables.md)_ generator.
+Renders [IPSet](https://ipset.netfilter.org) rules. The IPSet generator is built on the _[Iptables](iptables.md)_ generator.
 
 ## Header Format
 
@@ -9,12 +9,22 @@ targets:
     ipset: [INPUT|OUTPUT|FORWARD|custom] {ACCEPT|DROP} {inet|inet6} {nostate} {abbreviateterms} {truncateterms} {noverbose} {exists}
 ```
 
-All options work as described for _[IpTables](iptables.md)_, except:
+### Inherited header options
+
+These header options are included from the _[Iptables](iptables.md#header-format)_ page.
+
+!!! warning "Not supported on IPSet"
+    `nochainedterms` is listed in the Iptables table below, but IPSet doesn't support it. A filter that uses it raises an error. IPSet never uses per-term chains anyway: rules always go directly in the filter's chain.
+
+--8<-- "docs/reference/generators/iptables.md:header-options"
+
+### IPSet header options
+
+The following header options are specific to IPSet, or work differently than on Iptables:
 
 | Option | Description | Notes |
 |---|---|---|
-| `exists` | Add `-exist` to the `create` and `add` commands, so re-running them doesn't fail. | ipset only. |
-| `nochainedterms` | — | Not accepted (raises an error). ipset never uses per-term chains anyway: rules always go directly in the filter's chain. |
+| `exists` | Add `-exist` to the `create` and `add` commands, so re-running them doesn't fail. | |
 
 ## Term Format
 
@@ -26,7 +36,7 @@ These tokens are included from the _[Common](common.md)_ page.
 
 ### Inherited tokens
 
-These tokens are included from the _[IpTables](iptables.md#iptables-tokens)_ page.
+These tokens are included from the _[Iptables](iptables.md#iptables-tokens)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:term-format"
 
@@ -34,7 +44,7 @@ These tokens are included from the _[IpTables](iptables.md#iptables-tokens)_ pag
 
 ### Inherited actions
 
-These actions are included from the _[IpTables](iptables.md#actions)_ page.
+These actions are included from the _[Iptables](iptables.md#actions)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:actions"
 
@@ -42,7 +52,7 @@ These actions are included from the _[IpTables](iptables.md#actions)_ page.
 
 ### Inherited options
 
-These options are included from the _[IpTables](iptables.md#option)_ page.
+These options are included from the _[Iptables](iptables.md#option)_ page.
 
 --8<-- "docs/reference/generators/iptables.md:option"
 
@@ -50,7 +60,7 @@ These options are included from the _[IpTables](iptables.md#option)_ page.
 
 Each policy file renders to one file with the same name and a `.ips` extension, so `sample.yaml` renders `sample.ips`.
 
-### Differences from IpTables
+### Differences from Iptables
 
 When a term has more than one source or destination address, the addresses are put in an ipset instead of one rule per address. The output starts with the set commands, between `# begin:ipset-rules` and `# end:ipset-rules`, followed by the iptables rules.
 
@@ -95,4 +105,6 @@ add allow-ssh-src 192.168.10.0/24
 
 ## Known Issues
 
-IPSet has the same known issues as _[IpTables](iptables.md#known-issues)_.
+These known issues are included from _[Iptables](iptables.md#known-issues)_:
+
+--8<-- "docs/reference/generators/iptables.md:known-issues"

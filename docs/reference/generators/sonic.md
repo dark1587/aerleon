@@ -9,13 +9,11 @@ targets:
     sonic: [filter name] {inet|inet6|mixed}
 ```
 
-| Option | Description | Notes |
-|---|---|---|
-| `filter name` | Name of the ACL set. | Rendered as `name` and `config.name`. If it's left out, both render as `null`. |
-| `inet` | IPv4 only. | Default. ACL type `ACL_IPV4`. |
-| `inet6` | IPv6 only. | ACL type `ACL_IPV6`. |
-| `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see _[Known Issues](#known-issues)_. |
+### Inherited header options
 
+These header options are included from the _[OpenConfig](openconfig.md#header-format)_ page.
+
+--8<-- "docs/reference/generators/openconfig.md:header-options"
 
 ## Term Format
 

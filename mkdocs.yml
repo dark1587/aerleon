@@ -100,17 +100,18 @@ nav:
       - K8s: reference/generators/k8s.md
       - Linux:
         - IPSet: reference/generators/ipset.md
-        - IPTables: reference/generators/iptables.md
+        - Iptables: reference/generators/iptables.md
         - NFTables: reference/generators/nftables.md
         - Speedway: reference/generators/speedway.md
-      - Nokia SR Linux: reference/generators/nokiasrl.md
       - NVUE API: reference/generators/nvueapi.md
-      - OpenConfig: reference/generators/openconfig.md
+      - OpenConfig:
+        - Nokia SR Linux: reference/generators/nokiasrl.md
+        - OpenConfig Model: reference/generators/openconfig.md
+        - SONiC: reference/generators/sonic.md
       - PacketFilter: reference/generators/packetfilter.md
       - PaloAltoFW: reference/generators/paloalto.md
       - PcapFilter: reference/generators/pcap.md
       - Proxmox: reference/generators/proxmox.md
-      - SONiC: reference/generators/sonic.md
       - VMware NSX:
         - NSXv: reference/generators/nsxv.md
         - NSXt: reference/generators/nsxt.md

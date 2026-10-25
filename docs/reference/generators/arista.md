@@ -9,16 +9,11 @@ targets:
     arista: [filter name] {standard|extended|object-group|inet6|mixed} {enable_dsmo} {noverbose}
 ```
 
-| Option | Description | Notes |
-|---|---|---|
-| `filter name` | Name of the access list. | |
-| `standard` | Render a standard access list. | Numeric names must be in 1-99 or 1300-1999. |
-| `extended` | Render an extended access list. | Default. |
-| `object-group` | Render an extended access list that uses object-groups for ports and addresses. | |
-| `inet6` | Render an IPv6-only access list. | |
-| `mixed` | Render an IPv4 (extended) list and an IPv6 list together. | |
-| `enable_dsmo` | Turn on discontinuous subnet mask summarization. | Optional. |
-| `noverbose` | Leave out extra term and address comments. | Optional. |
+### Inherited header options
+
+These header options are included from the _[Cisco](cisco.md#header-format)_ page.
+
+--8<-- "docs/reference/generators/cisco.md:header-options"
 
 ## Term Format
 

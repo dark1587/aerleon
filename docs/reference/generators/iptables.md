@@ -1,6 +1,6 @@
-# IpTables
+# Iptables
 
-Renders IPTables commands.
+Renders iptables commands.
 
 !!! note
     For `iptables-restore` compatible output, use the _[Speedway](speedway.md)_ generator.
@@ -11,6 +11,8 @@ Renders IPTables commands.
 targets:
     iptables: [INPUT|OUTPUT|FORWARD|custom] {ACCEPT|DROP} {inet|inet6} {nostate} {abbreviateterms} {truncateterms} {noverbose} {nochainedterms}
 ```
+
+<!-- --8<-- [start:header-options] -->
 
 | Option | Description | Notes |
 |---|---|---|
@@ -25,6 +27,8 @@ targets:
 | `noverbose` | Leave out term comments and owner. | |
 | `nochainedterms` | Put every rule directly in the filter's chain instead of one chain per term. | |
 
+<!-- --8<-- [end:header-options] -->
+
 ## Term Format
 
 ### Common tokens
@@ -33,9 +37,9 @@ These tokens are included from the _[Common](common.md)_ page.
 
 --8<-- "docs/reference/generators/common.md:common-tokens"
 
-### IpTables tokens
+### Iptables tokens
 
-The following tokens are specific to IpTables:
+The following tokens are specific to Iptables:
 
 <!-- --8<-- [start:term-format] -->
 
@@ -123,5 +127,5 @@ filters:
 ## Known Issues
 
 !!! bug "Known issues"
-    * **Header options leak between filters.** `nostate`, `noverbose`, `nochainedterms` and the default policy aren't reset between headers. If a policy has several iptables filters, later filters inherit these settings from earlier ones.
+    * **Header options leak between filters.** `nostate`, `noverbose`, `nochainedterms` and the default policy aren't reset between headers. If a policy has several Iptables filters, later filters inherit these settings from earlier ones.
     * **`log-limit` renders invalid syntax.** The log rule is rendered as `-m --limit 10/minute …`, which iptables rejects. It should be `-m limit --limit 10/minute …`.

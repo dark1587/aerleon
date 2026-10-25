@@ -1,6 +1,6 @@
-# OpenConfig
+# OpenConfig Model
 
-Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/models/schemadocs/yangdoc/openconfig-acl.html) as JSON. _[SONiC](sonic.md)_ and _[Nokia SR Linux](nokiasrl.md)_ are built on this generator.
+Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/models/schemadocs/yangdoc/openconfig-acl.html) as JSON.
 
 ## Header Format
 
@@ -8,6 +8,8 @@ Renders ACL sets in the [OpenConfig ACL model](https://openconfig.net/projects/m
 targets:
     openconfig: [filter name] {inet|inet6|mixed}
 ```
+
+<!-- --8<-- [start:header-options] -->
 
 | Option | Description | Notes |
 |---|---|---|
@@ -17,6 +19,8 @@ targets:
 | `mixed` | IPv4 and IPv6. | ACL type `ACL_MIXED`. Each term is rendered once for IPv4 and once for IPv6. A term with no addresses of one family matches everything in that family; see _[Known Issues](#known-issues)_. |
 
 Any other header option is silently ignored.
+
+<!-- --8<-- [end:header-options] -->
 
 ## Term Format
 
