@@ -32,6 +32,18 @@ header {
 }
 """
 
+GOOD_HEADER_INET = """
+header {
+  target:: pcap test-filter inet
+}
+"""
+
+GOOD_HEADER_INET6 = """
+header {
+  target:: pcap test-filter inet6
+}
+"""
+
 GOOD_HEADER_IN = """
 header {
   comment:: "this is a test acl"
@@ -222,6 +234,28 @@ term accept-prod-except-mgmt {
 }
 """
 
+SOURCE_EXCLUDE_ONLY_TERM = """
+term accept-except-mgmt {
+  source-exclude:: MGMT
+  action:: accept
+}
+"""
+
+SOURCE_EXCLUDE_ALL_IPV6_TERM = """
+term accept-prod-except-ipv6 {
+  source-address:: PROD_NETWRK PROD_V6
+  source-exclude:: ANY
+  action:: accept
+}
+"""
+
+ACCEPT_PROD_V6_TERM = """
+term accept-prod-v6 {
+  source-address:: PROD_V6
+  action:: accept
+}
+"""
+
 ESTABLISHED_OPTION_TERM = """
 term accept-established {
   protocol:: tcp
@@ -339,6 +373,7 @@ class PcapFilter(absltest.TestCase):
         super().setUp()
         self.naming = naming.Naming()
         self.naming._ParseLine('PROD_NETWRK = 10.0.0.0/8', 'networks')
+        self.naming._ParseLine('PROD_V6 = 2001:db8::/32', 'networks')
         self.naming._ParseLine('ANY = ::/0', 'networks')
         self.naming._ParseLine('SMTP = 25/tcp', 'services')
         self.naming._ParseLine('MGMT = 10.1.0.0/24', 'networks')
@@ -596,6 +631,33 @@ class PcapFilter(absltest.TestCase):
             '(tcp[tcpflags] & (tcp-ack) == (tcp-ack))',
             self._Render(GOOD_HEADER + ESTABLISHED_OPTION_TERM),
         )
+
+    def testSourceExcludeWithoutAddress(self):
+        self.assertEqual(
+            self._Render(GOOD_HEADER + SOURCE_EXCLUDE_ONLY_TERM),
+            '(not (src net 10.1.0.0/24))\n',
+        )
+
+    def testExcludeCoveringEveryAddressMatchesNothing(self):
+        self.assertEqual(
+            self._Render(GOOD_HEADER_INET6 + SOURCE_EXCLUDE_ALL_IPV6_TERM), '(len < 0)\n'
+        )
+
+    def testExcludeCoveringOneFamilyKeepsTheOther(self):
+        self.assertEqual(
+            self._Render(GOOD_HEADER + SOURCE_EXCLUDE_ALL_IPV6_TERM),
+            '(((src net 10.0.0.0/8 or src net 2001:db8::/32) and not (src net ::/0)))\n',
+        )
+
+    def testTermCondition(self):
+        pol = policy.ParsePolicy(
+            GOOD_HEADER_INET + ACCEPT_PROD_V6_TERM + DEFAULT_DENY_TERM + ACCEPT_SMTP_TERM,
+            self.naming,
+        )
+        _, terms = pol.filters[0]
+        conditions = [pcap.Term(term, 'test-filter', 'inet').Condition() for term in terms]
+        # can't match in this family, matches everything, matches some packets
+        self.assertEqual(conditions, [None, '', '((proto \\tcp) and (dst port 25))'])
 
     def testDirectionDoesNotLeakIntoNextFilter(self):
         result = self._Render(GOOD_HEADER_IN + GOOD_TERM_LOG + GOOD_HEADER + GOOD_TERM_ICMP)

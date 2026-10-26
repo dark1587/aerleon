@@ -111,6 +111,19 @@ class Term(aclgenerator.Term):
 
     def __str__(self) -> str:
         """Render config output from this term object."""
+        cond = self.Condition()
+        if cond is None:
+            return ''
+        return cond + '\n'
+
+    def Condition(self) -> str | None:
+        """Build the pcap expression matching this term.
+
+        Returns:
+          None if the term can't match any packet (none of its addresses are in
+          this address family, or its exclusions cover all of them), the empty
+          string if it matches every packet, otherwise the expression.
+        """
         conditions = []
 
         # if terms does not specify action, use filter default action
@@ -131,11 +144,12 @@ class Term(aclgenerator.Term):
                         term=self.term.name, direction='source', af=self.af
                     )
                 )
-            return ''
+            return None
 
-        conditions.append(
-            self._GenerateAddrStatement(term_saddrs, self.term.source_address_exclude, 'src')
-        )
+        saddr = self._GenerateAddrStatement(term_saddrs, self.term.source_address_exclude, 'src')
+        if saddr is None:
+            return None
+        conditions.append(saddr)
 
         # destination address
         term_daddrs = self._CheckAddressAf(self.term.destination_address)
@@ -146,11 +160,14 @@ class Term(aclgenerator.Term):
                         term=self.term.name, direction='destination', af=self.af
                     )
                 )
-            return ''
+            return None
 
-        conditions.append(
-            self._GenerateAddrStatement(term_daddrs, self.term.destination_address_exclude, 'dst')
+        daddr = self._GenerateAddrStatement(
+            term_daddrs, self.term.destination_address_exclude, 'dst'
         )
+        if daddr is None:
+            return None
+        conditions.append(daddr)
 
         # protocol
         if self.term.protocol_except:
@@ -197,7 +214,7 @@ class Term(aclgenerator.Term):
         elif cond and self.direction == 'out':
             cond = Term.JoinConditionals(['src net localhost', cond], 'and')
 
-        return cond + '\n'
+        return cond
 
     def _CheckAddressAf(self, addrs: list[IPv4 | IPv6]) -> list[str | IPv4 | IPv6]:
         """Verify that the requested address-family matches the address's family."""
@@ -238,31 +255,45 @@ class Term(aclgenerator.Term):
     def _GenerateAddrStatement(
         self,
         addrs: list[str | IPv6 | IPv4],
-        exclude_addrs: list[str | IPv6 | IPv4],
+        exclude_addrs: list[IPv6 | IPv4],
         direction: str,
-    ) -> str:
+    ) -> str | None:
+        """Build the address expression for one direction.
+
+        Returns:
+          None if the exclusions cover every address, so no packet can match,
+          the empty string if every address matches, otherwise the expression.
+        """
+        if exclude_addrs and self._ExcludesEveryAddress(addrs, exclude_addrs):
+            return None
+
         addrlist = []
         for d in addrs:
             if d != 'any' and str(d) != '::/0':
                 addrlist.append(f'{direction} net {d}')
 
-        # the excludes are joined to the addresses with 'and not' below
-        excludes = []
-        if exclude_addrs:
-            for d in exclude_addrs:
-                if d != 'any' and str(d) != '::/0':
-                    excludes.append(f'{direction} net {d}')
-                else:
-                    # excluding 'any' doesn't really make sense ...
-                    return ''
-
-        if excludes:
-            return Term.JoinConditionals(
-                [Term.JoinConditionals(addrlist, 'or'), Term.JoinConditionals(excludes, 'or')],
-                'and not',
-            )
-        else:
+        if not exclude_addrs:
             return Term.JoinConditionals(addrlist, 'or')
+
+        excludes = Term.JoinConditionals([f'{direction} net {d}' for d in exclude_addrs], 'or')
+        if not addrlist:
+            return f'not {excludes}'
+        return Term.JoinConditionals([Term.JoinConditionals(addrlist, 'or'), excludes], 'and not')
+
+    def _ExcludesEveryAddress(
+        self, addrs: list[str | IPv6 | IPv4], exclude_addrs: list[IPv6 | IPv4]
+    ) -> bool:
+        """Return True if every address in addrs is inside one of exclude_addrs."""
+        if addrs == ['any']:
+            # no addresses were given, so the term covers the filter's whole families
+            addrs = {
+                'inet': [IPv4('0.0.0.0/0')],
+                'inet6': [IPv6('::/0')],
+            }.get(self.af, [IPv4('0.0.0.0/0'), IPv6('::/0')])
+        return all(
+            any(addr.version == ex.version and addr.subnet_of(ex) for ex in exclude_addrs)
+            for addr in addrs
+        )
 
     def _GenerateProtoStatement(self, protocols: list[str]) -> str:
         return Term.JoinConditionals([self._PROTO_TABLE[p] for p in protocols], 'or')
@@ -460,11 +491,11 @@ class PcapFilter(aclgenerator.ACLGenerator):
         matched = []
         earlier = []  # conditions of earlier terms with other actions
         for term in terms:
-            term_str = str(term)
-            if not term_str:
-                # the term doesn't apply to this address family
+            condition = term.Condition()
+            if condition is None:
+                # the term can't match any packet
                 continue
-            condition = term_str.strip()  # an empty condition matches everything
+            # an empty condition matches every packet
             if str(term.term.action[0]) in actions:
                 if not condition:
                     if not earlier:
