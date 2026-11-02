@@ -54,7 +54,6 @@ The following tokens are specific to Proxmox:
 |---|---|---|
 | `accept` | `ACCEPT` | |
 | `deny` | `DROP` | |
-| `next`, `reject-with-tcp-rst` | — | **Broken:** pass validation, then crash with `KeyError`. |
 | `reject` | `REJECT` | |
 
 ## Option

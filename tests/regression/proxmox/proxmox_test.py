@@ -2,7 +2,7 @@
 
 from absl.testing import absltest
 
-from aerleon.lib import naming, policy, proxmox
+from aerleon.lib import aclgenerator, naming, policy, proxmox
 from aerleon.lib import yaml as yaml_frontend
 from aerleon.lib.proxmox import UnsupportedFilterOptionError, ZoneMismatchError
 from tests.regression_utils import capture
@@ -86,6 +86,13 @@ term good-term-1 {
    protocol:: tcp
    action:: accept
    comment:: "some comment"
+}
+"""
+
+UNSUPPORTED_ACTION_TERM = """
+term unsupported-action {
+   protocol:: tcp
+   action:: %s
 }
 """
 
@@ -223,6 +230,15 @@ class ProxmoxFWTest(absltest.TestCase):
         pol = policy.ParsePolicy(BAD_HEADER_2 + GOOD_TERM_1, self.naming)
         with self.assertRaises(UnsupportedFilterOptionError):
             proxmox.Proxmox(pol, EXP_INFO)
+
+    def testUnsupportedActionRejected(self):
+        for action in ('next', 'reject-with-tcp-rst'):
+            with self.subTest(action=action):
+                pol = policy.ParsePolicy(
+                    GOOD_HEADER_1 + UNSUPPORTED_ACTION_TERM % action, self.naming
+                )
+                with self.assertRaisesRegex(aclgenerator.UnsupportedFilterError, action):
+                    proxmox.Proxmox(pol, EXP_INFO)
 
     def testMissingArguments(self):
         pol = policy.ParsePolicy(BAD_HEADER_3 + GOOD_TERM_1, self.naming)

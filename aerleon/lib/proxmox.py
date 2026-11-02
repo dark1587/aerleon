@@ -495,7 +495,12 @@ class Proxmox(aclgenerator.ACLGenerator):
             # proxmox firewall supports icmp type + icmp code
             'icmp_code',
         }
-        supported_sub_tokens.update({'option': set(LOG_LEVELS_MAP_OPTIONS.keys())})
+        supported_sub_tokens.update(
+            {
+                'action': set(ACTIONS_MAP.keys()),
+                'option': set(LOG_LEVELS_MAP_OPTIONS.keys()),
+            }
+        )
         return supported_tokens, supported_sub_tokens
 
     def _TranslatePolicy(self, pol: policy.Policy, exp_info: int) -> None:
