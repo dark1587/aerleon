@@ -48,9 +48,8 @@ NSXt also reads:
 |---|---|---|
 | `accept` | `ALLOW` | |
 | `deny` | `DROP` | |
-| `next` | — | Accepted, but has no mapping (renders `null`). |
 | `reject` | `REJECT` | |
-| `reject-with-tcp-rst` | `REJECT` | TCP reset is not supported. |
+| `reject-with-tcp-rst` | `REJECT` | Same as `reject`: NSX-T rejects TCP with a TCP reset and other traffic with ICMP administratively prohibited. |
 
 ## Output
 

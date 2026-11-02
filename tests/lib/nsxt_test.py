@@ -20,7 +20,7 @@ from unittest import mock
 
 from absl.testing import absltest
 
-from aerleon.lib import nacaddr, naming, nsxt, policy
+from aerleon.lib import aclgenerator, nacaddr, naming, nsxt, policy
 
 ICMPV6_TERM = """\
   term test-icmpv6 {
@@ -295,6 +295,17 @@ BAD_HEADER_4 = """\
   }
   """
 
+NEXT_POLICY = """\
+  header {
+    target:: nsxt INET_FILTER_NAME inet
+  }
+
+  term next-term {
+    protocol:: tcp
+    action:: next
+  }
+  """
+
 # Print a info message when a term is set to expire in that many weeks.
 # This is normally passed from command line.
 EXP_INFO = 2
@@ -417,6 +428,11 @@ class TermTest(absltest.TestCase):
     def test_bad_header_case_4(self):
         pol = policy.ParsePolicy(BAD_HEADER_4 + ICMPV6_TERM, self.naming, False)
         self.assertRaises(nsxt.UnsupportedNsxtAccessListError, nsxt.Nsxt, pol, EXP_INFO)
+
+    def test_next_action_rejected(self):
+        pol = policy.ParsePolicy(NEXT_POLICY, self.naming, False)
+        with self.assertRaisesRegex(aclgenerator.UnsupportedFilterError, 'next'):
+            nsxt.Nsxt(pol, EXP_INFO)
 
 
 if __name__ == '__main__':

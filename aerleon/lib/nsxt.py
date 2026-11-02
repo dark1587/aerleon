@@ -27,7 +27,7 @@ _ACTION_TABLE = {
     'accept': 'ALLOW',
     'deny': 'DROP',
     'reject': 'REJECT',
-    'reject-with-tcp-rst': 'REJECT',  # tcp rst not supported
+    'reject-with-tcp-rst': 'REJECT',  # REJECT already sends a tcp rst for tcp
 }
 
 _NSXT_SUPPORTED_KEYWORDS = [
@@ -275,6 +275,17 @@ class Nsxt(aclgenerator.ACLGenerator):
 
     _OPTIONAL_SUPPORTED_KEYWORDS = {'expiration', 'logging'}
     _FILTER_OPTIONS_DICT = {}
+
+    def _BuildTokens(self) -> tuple[set[str], dict[str, set[str]]]:
+        """Build supported tokens for platform.
+
+        Returns:
+          tuple containing both supported tokens and sub tokens
+        """
+        supported_tokens, supported_sub_tokens = super()._BuildTokens()
+
+        supported_sub_tokens.update({'action': set(_ACTION_TABLE)})
+        return supported_tokens, supported_sub_tokens
 
     def _TranslatePolicy(self, pol, exp_info):
         self.nsxt_policies = []
