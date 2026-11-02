@@ -50,9 +50,7 @@ The following tokens are specific to Juniper MSMPC:
 |---|---|---|
 | `accept` | `accept` | |
 | `deny` | `discard` | |
-| `next` | `None;` | **Broken:** passes validation but has no MSMPC mapping. Don't use. |
 | `reject` | `reject` | |
-| `reject-with-tcp-rst` | `None;` | **Broken:** passes validation but has no MSMPC mapping. Don't use. |
 
 ## Option
 

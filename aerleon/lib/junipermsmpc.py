@@ -395,13 +395,14 @@ class JuniperMSMPC(aclgenerator.ACLGenerator):
         }
         supported_sub_tokens.update(
             {
+                'action': set(Term._ACTIONS),
                 'option': {
                     'established',
                     # TODO(sneakywombat): add all options to lex.
                     '.*',  # make ArbitraryOptions work, yolo.
                     'tcp-established',
                     'inactive',
-                }
+                },
             }
         )
         return supported_tokens, supported_sub_tokens

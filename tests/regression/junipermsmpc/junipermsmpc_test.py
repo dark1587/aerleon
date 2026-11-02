@@ -22,7 +22,7 @@ from unittest import mock
 
 from absl.testing import absltest, parameterized
 
-from aerleon.lib import junipermsmpc, nacaddr, naming, policy
+from aerleon.lib import aclgenerator, junipermsmpc, nacaddr, naming, policy
 from tests.regression_utils import capture
 
 GOOD_HEADER = """
@@ -237,6 +237,12 @@ term good_term_35 {
   action:: accept
 }
 """
+UNSUPPORTED_ACTION_TERM = """
+term unsupported-action {
+  protocol:: tcp
+  action:: %s
+}
+"""
 GOOD_TERM_36 = """
 term good-term-36 {
   protocol:: tcp
@@ -397,7 +403,7 @@ SUPPORTED_TOKENS = frozenset(
 )
 
 SUPPORTED_SUB_TOKENS = {
-    'action': {'accept', 'deny', 'reject', 'next', 'reject-with-tcp-rst'},
+    'action': {'accept', 'deny', 'reject'},
     'icmp_type': {
         'alternate-address',
         'certification-path-advertisement',
@@ -988,6 +994,12 @@ class JuniperMSMPCTest(parameterized.TestCase):
         st, sst = msmpc._BuildTokens()
         self.assertSetEqual(st, SUPPORTED_TOKENS)
         self.assertDictEqual(sst, SUPPORTED_SUB_TOKENS)
+
+    @parameterized.parameters('next', 'reject-with-tcp-rst')
+    def testUnsupportedActionRejected(self, action):
+        pol = policy.ParsePolicy(GOOD_HEADER + UNSUPPORTED_ACTION_TERM % action, self.naming)
+        with self.assertRaisesRegex(aclgenerator.UnsupportedFilterError, action):
+            junipermsmpc.JuniperMSMPC(pol, EXP_INFO)
 
     @capture.stdout
     def testRangedPorts(self):
