@@ -29,7 +29,7 @@ out2/site-a/core.jcl
 
 ## Finding policy files
 
-`aclgen` renders the `*.pol`, `*.yaml` and `*.yml` files found directly inside every directory named `pol` under `base_directory`. Files in subdirectories of a `pol` directory aren't rendered. The example above uses this project:
+`aclgen` renders the `*.pol`, `*.yaml` and `*.yml` files found directly inside every directory named `pol` under `base_directory`. Files in subdirectories of a `pol` directory aren't rendered. `pol` directories under a directory whose name matches `--ignore_directories` are skipped; the default is `DEPRECATED,def`, and the flag takes a comma-separated list. The example above uses this project:
 
 ```
 def/

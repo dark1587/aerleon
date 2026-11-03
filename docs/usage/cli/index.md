@@ -30,7 +30,7 @@ exp_info | ✔ |  |  |
 
 ### base_directory
 
-Policy files should be placed in **base_directory**. `aclgen` renders the policy files in every directory named `pol` under it (see _[Finding policy files](aclgen.md#finding-policy-files)_); `pol2yaml` converts every `.pol` and `.inc` file under it, except if the flag `--policy_file` is used to give a specific input file (`aclgen` only). Relative paths that appear in "include" directives will be resolved against base_directory. The default value is './policies'.
+Policy files should be placed in **base_directory**. `aclgen` renders the policy files in every directory named `pol` under it (see _[Finding policy files](aclgen.md#finding-policy-files)_), except if the flag `--policy_file` is used to give a specific input file; `pol2yaml` converts every `.pol` and `.inc` file under it. Relative paths that appear in "include" directives will be resolved against base_directory. The default value is './policies'.
 
 ### definitions_directory
 

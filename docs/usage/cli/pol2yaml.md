@@ -202,6 +202,8 @@ This walkthrough converts a small Capirca-style project to YAML and checks that 
         Multiple definitions found for network: MGMT
         ```
 
+        Do not leave both the `.pol` and the converted `.yaml` policy in `pol/` either. `aclgen` raises no error: it renders both files, which write to the same output names, so one set of output files silently overwrites the other. With `edge-inbound.pol` and `edge-inbound.yaml` both present, `aclgen` reports `2 pol files found` and `writing 4 files to disk`, but only `edge-inbound.acl` and `edge-inbound.jcl` result.
+
 6. **Run `aclgen`.** With only the YAML files left, `aclgen` succeeds and writes the Cisco and Juniper files to the current directory:
 
     ```
