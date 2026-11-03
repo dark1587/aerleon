@@ -1,6 +1,8 @@
 # pol2yaml
 
-`pol2yaml` converts .pol, .inc, .svc, and .net files to equivalent YAML files. It can be found in [its own repository](https://github.com/aerleon/pol2yaml) but is documented here.
+`pol2yaml` converts .pol, .inc, .svc, and .net files to equivalent YAML files. It is a separate Node.js tool, not part of the Aerleon Python package. It lives in [its own repository](https://github.com/aerleon/pol2yaml) and is documented here. Run it with `npx`, which downloads and runs it without a permanent install.
+
+Tested with pol2yaml 1.2.1.
 
 ## Flags
 
@@ -13,7 +15,7 @@ Usage: pol2yaml [--base_directory DIRECTORY] [-c|--config_file FILE] [--definiti
 Examples:
 
 * Recursively convert all .pol and .inc files in base_directory.
-  Original files are left in place. Each YAML file is placed in the same
+  Original files are left in place. Each YAML files is placed in the same
   directory as the original file. Run sanity_check after (-s).
 
     npx pol2yaml -s --base_directory policies/
@@ -34,6 +36,11 @@ Options:
                     the 'aerleon.yml' config file.
 
 --help | -h         Display this message and exit.
+
+--no_collapse       By default, lists will be formatted as space-separated
+                    values on the same line as much as possible. This option
+                    disables this behavior and causes lists to always appear
+                    with one item per line.
 
 --no_fix_include    By default, if an #include directive references a file
                     name with the .inc extension, the file name will appear
@@ -58,3 +65,146 @@ Options:
 ```
 
 Options shared with other tools: _[Common Options](index.md#common-options)_.
+
+## Migrating a Capirca project
+
+This walkthrough converts a small Capirca-style project to YAML and checks that the output is unchanged. Every output block below was pasted from a real run.
+
+1. **Starting layout.** The project has two definitions files, one policy and one include:
+
+    ```
+    def/NETWORK.net
+    def/SERVICES.svc
+    policies/includes/default-deny.inc
+    policies/pol/edge-inbound.pol
+    aerleon.yml
+    ```
+
+    `def/NETWORK.net`:
+
+    ```
+    MGMT = 10.0.0.0/24
+           192.168.10.0/24
+    ```
+
+    `def/SERVICES.svc`:
+
+    ```
+    SSH = 22/tcp
+    ```
+
+    `policies/includes/default-deny.inc`:
+
+    ```
+    term default-deny {
+      action:: deny
+    }
+    ```
+
+    `policies/pol/edge-inbound.pol`:
+
+    ```
+    header {
+      target:: cisco edge-inbound extended
+      target:: juniper edge-inbound inet
+    }
+
+    term allow-ssh {
+      comment:: "Allow SSH from management."
+      source-address:: MGMT
+      protocol:: tcp
+      destination-port:: SSH
+      action:: accept
+    }
+
+    #include 'includes/default-deny.inc'
+    ```
+
+2. **Configure the directories.** `aerleon.yml` tells both `pol2yaml` and `aclgen` where to look:
+
+    ```yaml
+    base_directory: ./policies
+    definitions_directory: ./def
+    ```
+
+3. **Convert and sanity-check.** `-s` runs `aclgen` on the original files and on the YAML files and compares the results. To do this it tries `python3 -m aerleon`, then `python3 -m pipx run aerleon`, then `aclgen`, and uses the first that works.
+
+    ```
+    $ npx --yes pol2yaml@1.2.1 -s
+    Converting policies/pol/edge-inbound.pol
+    Converting policies/includes/default-deny.inc
+    Converting def/SERVICES.svc
+    Converting def/NETWORK.net
+    Running sanity check...
+    Running original files through aclgen...
+    Running YAML files through aclgen...
+    Comparing aclgen outputs...
+    Sanity check passed
+    ```
+
+    The original files are left in place, and each YAML file is written next to its source.
+
+4. **Review the generated YAML.** The `.inc` include became `include: includes/default-deny.yaml`: the file name now ends in `.yaml`. See _[Policy File Spec](../../reference/policy_files.md#includes)_ and _[Definitions Spec](../../reference/definitions.md)_ for the formats.
+
+    `def/NETWORK.yaml`:
+
+    ```yaml
+    networks:
+      MGMT:
+        values:
+          - address: 10.0.0.0/24
+          - address: 192.168.10.0/24
+    ```
+
+    `def/SERVICES.yaml`:
+
+    ```yaml
+    services:
+      SSH:
+        - port: 22
+          protocol: tcp
+    ```
+
+    `policies/includes/default-deny.yaml`:
+
+    ```yaml
+    terms:
+      - name: default-deny
+        action: deny
+    ```
+
+    `policies/pol/edge-inbound.yaml`:
+
+    ```yaml
+    filters:
+      - header:
+          targets:
+            cisco: edge-inbound extended
+            juniper: edge-inbound inet
+        terms:
+          - name: allow-ssh
+            comment: |-
+              Allow SSH from management.
+            source-address: MGMT
+            protocol: tcp
+            destination-port: SSH
+            action: accept
+          - include: includes/default-deny.yaml
+    ```
+
+5. **Remove the originals.** Delete the `.pol`, `.inc`, `.net` and `.svc` files once you are happy with the YAML.
+
+    !!! warning
+        Do not leave both formats in `def/`. Aerleon reads the `.net` and `.yaml` definitions together, finds `MGMT` defined twice, and stops. The last lines of the `aclgen` error are:
+
+        ```
+        aerleon.lib.naming.NamespaceCollisionError:
+        Multiple definitions found for network: MGMT
+        ```
+
+6. **Run `aclgen`.** With only the YAML files left, `aclgen` succeeds and writes the Cisco and Juniper files to the current directory:
+
+    ```
+    ./edge-inbound.acl
+    ./edge-inbound.jcl
+    ```
