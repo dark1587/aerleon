@@ -1,8 +1,8 @@
-# Introduction
+# Definitions Spec
 
 The naming library is used by the Aerleon system to parse definitions of network
 and service data. These definitions are based on 'tokens' that are used in the
-high-level [policy language](yaml_reference.md).
+high-level _[policy language](policy_files.md)_.
 
 ## Basic Usage
 

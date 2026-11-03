@@ -1,4 +1,4 @@
-# Policy Files
+# Policy File Spec
 
 ## Usage
 

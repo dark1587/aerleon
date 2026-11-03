@@ -17,6 +17,10 @@ theme:
     - navigation.tabs
     - navigation.tabs.sticky
     - navigation.top
+hooks:
+  - docs/hooks/known_docstring_warnings.py
+exclude_docs: |
+  hooks/
 extra_css:
   - css/extra.css
 extra:
@@ -47,6 +51,10 @@ markdown_extensions:
 plugins:
   - search
   - mkdocs-version-annotations
+  - redirects:
+      redirect_maps:
+        reference/yaml_reference.md: reference/policy_files.md
+        reference/naming.md: reference/definitions.md
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -65,12 +73,12 @@ nav:
     - Links: links.md
   - Usage:
     - Command Line Usage: reference/cli.md
-    - Policy Files: reference/yaml_reference.md
-    - Naming: reference/naming.md
     - AclCheck: aclcheck.md
   - API:
     - Generate API: api.md
     - AclCheck API: aclcheck_api.md
   - Reference:
+    - Policy File Spec: reference/policy_files.md
+    - Definitions Spec: reference/definitions.md
     - Generators: reference/generators.md
     - Generator Development: reference/generator_patterns.md
