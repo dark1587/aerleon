@@ -56,6 +56,7 @@ plugins:
         reference/cli.md: usage/cli/index.md
         reference/yaml_reference.md: reference/policy_files.md
         reference/naming.md: reference/definitions.md
+        aclcheck.md: usage/cli/aclcheck.md
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -79,7 +80,6 @@ nav:
       - aclcheck: usage/cli/aclcheck.md
       - cgrep: usage/cli/cgrep.md
       - pol2yaml: usage/cli/pol2yaml.md
-    - AclCheck: aclcheck.md
   - API:
     - Generate API: api.md
     - AclCheck API: aclcheck_api.md
