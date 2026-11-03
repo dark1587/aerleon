@@ -20,6 +20,8 @@ aclcheck --policy-file ./policies/pol/sample_cisco_lab_yaml.yaml --source 192.16
 
 The output shows the terms in the policy that match the specified traffic and the action (for example `accept`, `deny`, `next`) taken by those terms.
 
+A term marked "possible match" might apply but can't be confirmed from the arguments given. The bracketed list gives the reasons: here `tcp-est` means the term only accepts established TCP traffic (replies), and a bare packet check can't tell whether the packet belongs to an established connection. The other reasons are `source-ip` or `destination-ip` (only part of the given network matched the term), `first-frag`, `frag-offset`, `packet-length` and `est`. A term with no reasons is a definite match.
+
 ## Flags
 
 ```

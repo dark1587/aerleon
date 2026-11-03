@@ -6,13 +6,13 @@
 
 Render every policy under `./policies` (definitions are read from `./def`) into `out/`:
 
-```
+```bash
 aclgen --output_directory out
 ```
 
 Render a single policy file into `out2/`:
 
-```
+```bash
 aclgen --output_directory out2 --policy_file policies/site-a/pol/core.yaml
 ```
 
@@ -29,7 +29,7 @@ out2/site-a/core.jcl
 
 ## Finding policy files
 
-`aclgen` renders the `*.pol`, `*.yaml` and `*.yml` files found directly inside every directory named `pol` under `base_directory`. Files in subdirectories of a `pol` directory aren't rendered. `pol` directories under a directory whose name matches `--ignore_directories` are skipped; the default is `DEPRECATED,def`, and the flag takes a comma-separated list. The example above uses this project:
+`aclgen` renders the `*.pol`, `*.yaml` and `*.yml` files found directly inside every directory named `pol` under `base_directory`. Files in subdirectories of a `pol` directory aren't rendered. `pol` directories are skipped when they sit directly inside (`def/pol`) or one level below (`def/a/pol`) a directory matching one of the glob patterns in `--ignore_directories`; deeper ones (`def/a/b/pol`) are still found. The default is `DEPRECATED,def`, and the flag takes a comma-separated list. The example above uses this project:
 
 ```
 def/
