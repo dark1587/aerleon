@@ -53,6 +53,7 @@ plugins:
   - mkdocs-version-annotations
   - redirects:
       redirect_maps:
+        reference/cli.md: usage/cli/index.md
         reference/yaml_reference.md: reference/policy_files.md
         reference/naming.md: reference/definitions.md
   - mkdocstrings:
@@ -72,7 +73,12 @@ nav:
     - Contributing: contributing.md
     - Links: links.md
   - Usage:
-    - Command Line Usage: reference/cli.md
+    - Command Line Usage:
+      - usage/cli/index.md
+      - aclgen: usage/cli/aclgen.md
+      - aclcheck: usage/cli/aclcheck.md
+      - cgrep: usage/cli/cgrep.md
+      - pol2yaml: usage/cli/pol2yaml.md
     - AclCheck: aclcheck.md
   - API:
     - Generate API: api.md
