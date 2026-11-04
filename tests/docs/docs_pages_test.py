@@ -192,18 +192,7 @@ def test_no_inheritance_word(path):
     assert "inheritance" not in strip_fences(path.read_text()).lower()
 
 
-_LINK_XFAIL = {
-    "docs/getting_started.md": pytest.mark.xfail(
-        strict=True, reason="trimmed in Task 6"
-    ),
-}
-LINK_PARAMS = [
-    pytest.param(p, id=_page_id(p), marks=_LINK_XFAIL.get(_page_id(p), ()))
-    for p in PAGES
-]
-
-
-@pytest.mark.parametrize("path", LINK_PARAMS)
+@pytest.mark.parametrize("path", PAGE_PARAMS)
 def test_internal_links_are_italic(path):
     matches = INTERNAL_LINK_RE.findall(strip_fences(path.read_text()))
     assert not matches, f"non-italic internal links: {matches}"

@@ -1,313 +1,60 @@
 # Getting Started with Aerleon
 
-The following sections will take you through a guided tour of Aerleon. We will cover general concepts such as policy files, network and service definitions, and put them together to output firewall configurations.
+This page takes you from nothing to a generated Cisco ACL in a few minutes. You will write a definitions file and a policy file, run `aclgen`, and read the output.
 
-## Setup
-!!! info
+It assumes Aerleon is already installed; see _[Install and Configure](install.md)_ if not.
 
-    This tutorial assumes you are working on a Linux operating system and have completed the [installation instructions](/en/latest/install/).
+## Create the directories
 
-You will want to make a temporary directory with the following structure.
+Make a scratch directory with a `def` directory for definitions and a `policies/pol` directory for policies.
+
 ```bash
-.
-├── def
-└── policies
-    └── pol
-```
-You can do this with the following commands.
-```bash
-mkdir -p aerleon_test/def
-mkdir -p aerleon_test/policies/pol
+mkdir -p aerleon_test/def aerleon_test/policies/pol
 cd aerleon_test
 ```
 
-The rest of this walkthrough will assume you are within the `aerleon_test` directory.
+The rest of this page assumes you are inside `aerleon_test`.
 
-## Definition Files
-Definition files allow you to define networks and services used in your policies. Generally it is much easier to read a name like `WEB_SERVERS` rather than a list of IP addresses. It is also beneficial to compose definitions together in certain places.
+## Write a definitions file
 
-```yaml
-networks:
-  RFC1918:
-    values:
-      - address: 10.0.0.0/8
-      - address: 172.16.0.0/12
-      - address: 192.168.0.0/16
-  WEB_SERVERS:
-    values:
-      - address: 10.0.0.1/32
-        comment: Web Server 1
-      - address: 10.0.0.2/32
-        comment: Web Server 2
-  MAIL_SERVERS:
-    values:
-      - address: 10.0.0.3/32
-        comment: Mail Server 1
-      - address: 10.0.0.4/32
-        comment: Mail Server 2
-  ALL_SERVERS:
-    values:
-      - WEB_SERVERS
-      - MAIL_SERVERS
-services:
-  HTTP:
-    - protocol: tcp
-      port: 80
-  HTTPS:
-    - protocol: tcp
-      port: 443
-  WEB:
-    - HTTP
-    - HTTPS
-  HIGH_PORTS:
-    - port: 1024-65535
-      protocol: tcp
-    - port: 1024-65535
-      protocol: udp
+Definitions give names to networks and services, so policies can say `MGMT` instead of a list of addresses. Save this as `def/definitions.yaml`.
+
+```yaml title="def/definitions.yaml"
+--8<-- "docs/examples/cli/policy-single/def/definitions.yaml"
 ```
 
-Above we have defined a couple of networks and services.
+`MGMT` is a network made of two subnets. `SSH` is a service: TCP port 22.
 
-* `RFC1918` is defined as three IP subnets.
-* `WEB_SERVERS` and `MAIL_SERVERS` are both two IP hosts and include a comment about those IPs.
-* `ALL_SERVERS` is a composite of both `WEB_SERVERS` and `MAIL_SERVERS`.
-* `HTTP` is defined as port 80 over TCP while `HTTPS` is port 443 over TCP.
-* `WEB` is a composite of both `HTTP` and `HTTPS`.
-* `HIGH_PORTS` is a port range of 1024 to 65535 over both TCP and UDP.
+## Write a policy
 
-Take the YAML above and insert it into a file in the `defs` directory.
-??? "Bash command"
-    ```bash
-    echo "networks:
-      RFC1918:
-        values:
-          - address: 10.0.0.0/8
-          - address: 172.16.0.0/12
-          - address: 192.168.0.0/16
-      WEB_SERVERS:
-        values:
-          - address: 10.0.0.1/32
-            comment: Web Server 1
-          - address: 10.0.0.2/32
-            comment: Web Server 2
-      MAIL_SERVERS:
-        values:
-          - address: 10.0.0.3/32
-            comment: Mail Server 1
-          - address: 10.0.0.4/32
-            comment: Mail Server 2
-      ALL_SERVERS:
-        values:
-          - WEB_SERVERS
-          - MAIL_SERVERS
-    services:
-      HTTP:
-        - protocol: tcp
-          port: 80
-      HTTPS:
-        - protocol: tcp
-          port: 443
-      WEB:
-        - HTTP
-        - HTTPS
-      HIGH_PORTS:
-        - port: 1024-65535
-          protocol: tcp
-        - port: 1024-65535
-          protocol: udp
-    " > def/definitions.yaml
-    ```
+Save this as `policies/pol/edge-inbound.yaml`.
 
-
-## Policy Files
-A policy file describes rules to be used to filter traffic at some point in your network. This may be a single point or multiple points that all share the same rules. With Aerleon you define your rules in YAML and output the correct syntax for different firewalls. In our example we will make a simple firewall that filters both ingress and egress traffic.
-
-```yaml
-filters:
-  - header:
-      comment: Example inbound
-      targets:
-        cisco: inbound extended
-    terms:
-      - name: accept-web-servers
-        comment: Accept connections to our web servers.
-        destination-address: WEB_SERVERS
-        destination-port: WEB
-        protocol: tcp
-        action: accept
-      - name: default-deny
-        comment: Deny anything else.
-        action: deny
+```yaml title="policies/pol/edge-inbound.yaml"
+--8<-- "docs/examples/cli/policy-single/policies/pol/edge-inbound.yaml"
 ```
-The above YAML is a basic example with almost the minimum necessary to output an ACL. We have `filters` as the top keyword and a single `header` `terms` pair.
 
-Inside of the `header` we have a comment to explain what this ACL is for, a `target` of cisco meaning we wish to output that syntax, and options for the cisco generator.
+A policy file is a list of `filters`. Each filter has a `header`, which names the `targets` (the platforms to generate for), and `terms`, the rules. Here one term accepts SSH from `MGMT`, and a final term denies everything else. See _[Writing Policies](usage/writing_policies.md)_ for the details.
 
-`terms` contains a list of terms which are translated into rules within the ACL. In this case there are two rules. `accept-web-servers` and `default-deny`. We see that in `accept-web-servers` there are a few fields such as `comment`, `destination-address`, `action` and more. You can find more information on every field available in our [generators section](reference/generators.md). `destination-address` and `destination-port` each refer to names we configured in our definitions. When this rule gets translated the definitions will be referenced and used to define the IPs and ports for this rule.
+## Run aclgen
 
-??? "Bash command"
-    ```bash
-    echo "filters:
-    - header:
-        comment: Example inbound
-        targets:
-          cisco: inbound extended
-      terms:
-        - name: accept-web-servers
-          comment: Accept connections to our web servers
-          destination-address: WEB_SERVERS
-          destination-port: WEB
-          protocol: tcp
-          action: accept
-        - name: default-deny
-          comment: Deny anything else.
-          action: deny" > policies/pol/example.pol.yaml
-    ```
-
-## Running ACLGen
-
-At this point we have definitions and a policy. We can run `aclgen` to get the config we can use on our firewall.
+From the `aerleon_test` directory, run:
 
 ```bash
-$ aclgen
-I0118 23:00:46.160622 139810786332672 aclgen.py:451] finding policies...
-W0118 23:00:46.162525 139810786332672 aclgen.py:369] --> policies/pol (1 pol files found)
-I0118 23:00:46.228089 139810786332672 plugin_supervisor.py:249] 0 plugins active.
-I0118 23:00:46.228377 139810786332672 plugin_supervisor.py:250] 27 generators registered.
-I0118 23:00:46.230094 139810786332672 aclgen.py:298] file changed: example.pol.acl
-I0118 23:00:46.256818 139810786332672 aclgen.py:384] writing 1 files to disk...
-I0118 23:00:46.257578 139810786332672 aclgen.py:403] writing file: example.pol.acl
-I0118 23:00:46.258050 139810786332672 aclgen.py:517] done.
+aclgen
 ```
 
-We can see in the output that a file with the extension `.acl` has been written to the directory. Inspecting this file we can see it contains the rules we configured in our YAML file but translated to Cisco format.
+No flags are needed: `aclgen` looks for policies in `./policies` and definitions in `./def` by default, and writes its output to the current directory. It logs its progress and writes `edge-inbound.acl`.
 
-## Adding Additional ACLs
+## Look at the output
 
-We currently have an inbound ACL but we wish to add an outbound ACL. In this case we append another `header` and `terms` section to our `filters`.
-
-```yaml
-filters:
-  - header:
-      comment: Example inbound
-      targets:
-        cisco: inbound extended
-    terms:
-      - name: accept-web-servers
-        comment: Accept connections to our web servers
-        destination-address: WEB_SERVERS
-        destination-port: WEB
-        protocol: tcp
-        action: accept
-      - name: default-deny
-        comment: Deny anything else.
-        action: deny
-  - header:
-      comment: Example outbound
-      targets:
-        cisco: outbound mixed
-    terms:
-      - name: deny-bad-destinations
-        destination-address: RFC1918
-        action: deny
-      - name: default-accept
-        action: accept
+```text title="edge-inbound.acl"
+--8<-- "docs/examples/cli/policy-single/expected/edge-inbound.acl"
 ```
 
+## Next steps
 
-??? "Bash command"
-    ```bash
-    echo "filters:
-    - header:
-        comment: Example inbound
-        targets:
-          cisco: inbound extended
-      terms:
-        - name: accept-web-servers
-          comment: Accept connections to our web servers
-          destination-address: WEB_SERVERS
-          destination-port: WEB
-          protocol: tcp
-          action: accept
-        - name: default-deny
-          comment: Deny anything else.
-          action: deny
-    - header:
-        comment: Example outbound
-        targets:
-          cisco: outbound extended
-      terms:
-        - name: deny-bad-destinations
-          destination-address: RFC1918
-          action: deny
-        - name: default-accept
-          action: accept" > policies/pol/example.pol.yaml
-    ```
-
-If you run `aclgen` again you will see it notices the difference in the YAML file and writes over the old ACL. This new ACL contains both the inbound and outbound ACLs we wanted.
-
-## Adding Additional Platforms
-In this example we have been generating a Cisco config. What happens though if you want to switch over to Juniper for some reason. Either you bought a new Juniper device and are migrating, or you have a one off that requires the same rules. This is simple to do, we just add a header option for Juniper.
-
-```yaml
-filters:
-  - header:
-      comment: Example inbound
-      targets:
-        cisco: inbound extended
-        juniper: inbound
-    terms:
-      - name: accept-web-servers
-        comment: Accept connections to our web servers
-        destination-address: WEB_SERVERS
-        destination-port: WEB
-        protocol: tcp
-        action: accept
-      - name: default-deny
-        comment: Deny anything else.
-        action: deny
-  - header:
-      comment: Example outbound
-      targets:
-        cisco: outbound mixed
-        juniper: outbound
-    terms:
-      - name: deny-bad-destinations
-        destination-address: RFC1918
-        action: deny
-      - name: default-accept
-        action: accept
-```
-
-??? "Bash command"
-    ```bash
-    echo "filters:
-    - header:
-        comment: Example inbound
-        targets:
-          cisco: inbound extended
-          juniper: inbound
-      terms:
-        - name: accept-web-servers
-          comment: Accept connections to our web servers
-          destination-address: WEB_SERVERS
-          destination-port: WEB
-          protocol: tcp
-          action: accept
-        - name: default-deny
-          comment: Deny anything else.
-          action: deny
-    - header:
-        comment: Example outbound
-        targets:
-          cisco: outbound mixed
-          juniper: outbound
-      terms:
-        - name: deny-bad-destinations
-          destination-address: RFC1918
-          action: deny
-        - name: default-accept
-          action: accept" > policies/pol/example.pol.yaml
-    ```
-
-If you run `aclgen` again you should see that it wrote two files now, the new one being `.jcl`. This is the Juniper file we wanted and will contain all the exact same rules but in the Juniper syntax.
+- _[Writing Policies](usage/writing_policies.md)_: add more platforms and more filters.
+- Writing Definitions: more on networks and services.
+- Includes: share terms between policies.
+- _[API](api.md)_: generate policies from Python.
+- _[Command Line Usage](usage/cli/index.md)_: every `aclgen` option.
