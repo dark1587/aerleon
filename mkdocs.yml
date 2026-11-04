@@ -99,6 +99,7 @@ nav:
     - Policy Objects: api/policy_objects.md
     - Definitions (Naming): api/definitions.md
     - Multi-Platform Headers: api/multi_platform_headers.md
+    - Includes in the API: api/includes.md
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Policy File Spec: reference/policy_files.md

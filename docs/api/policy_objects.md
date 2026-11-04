@@ -88,4 +88,4 @@ These cases come from `policy_gotchas.py`. Each case prints under its own `--- <
 - **A misspelled term key is dropped.** `destination_address` is not a term keyword. It is ignored with an `Unexpected term keyword destination_address` message in the log, and the term renders as `permit ip any any`. The example prints the `permit` lines so you can see it.
 - **A list and a space-separated string are equivalent.** Both forms of `source-address` render the same ACL, as the last case shows.
 - **A target value must be a non-empty string.** An empty value is an error, not a default.
-- **An `include` term needs a source.** A `{"include": ...}` term only works if you pass `include_path` or `includes` to `Generate()`. Without either, it fails. See _Includes in the API_.
+- **An `include` term needs a source.** A `{"include": ...}` term only works if you pass `include_path` or `includes` to `Generate()`. Without either, it fails. See _[Includes in the API](includes.md)_.

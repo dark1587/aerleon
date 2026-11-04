@@ -90,7 +90,7 @@ Choose `aclgen` when your policies are files in a repository and you want a comm
 - _[Policy Objects](policy_objects.md)_: the shape of a `PolicyDict`.
 - _[Definitions (Naming)](definitions.md)_: build a `Naming` from files or dictionaries.
 - _[Multi-Platform Headers](multi_platform_headers.md)_: several targets and options in one filter.
-- Includes in the API: share terms with `include_path` or `includes`.
+- _[Includes in the API](includes.md)_: share terms with `include_path` or `includes`.
 - Best Practices: validate input and choose an output mode.
 - AclCheck API: decide how a policy treats a packet.
 - _[Includes](../usage/includes.md)_: the same feature for YAML files.

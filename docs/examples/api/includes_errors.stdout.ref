@@ -1,0 +1,11 @@
+--- both arguments ---
+TypeError: include_path and includes are mutually exclusive.
+--- mistyped dictionary key ---
+remark $Id:$
+remark allow-ssh
+remark Allow SSH from the management network.
+remark default-deny
+--- missing suffix ---
+PolicyTypeError: Policy include source bogons must end in ".yaml" or ".yml". File=edge-inbound, Line=1.
+--- path outside include_path ---
+BadIncludePath: Include file cannot be loaded from outside the base directory. File=policies/includes/../edge-inbound.yaml base_directory=policies/includes
