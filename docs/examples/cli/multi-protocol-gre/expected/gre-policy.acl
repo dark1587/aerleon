@@ -1,0 +1,18 @@
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list extended gre-https
+ip access-list extended gre-https
+ remark $Id:$
+
+
+ remark allow-gre
+ remark GRE has no ports, so it gets its own term.
+ permit gre any host 192.0.2.1
+
+
+ remark allow-https
+ remark HTTPS to the same peer.
+ permit tcp any host 192.0.2.1 eq 443
+
+exit

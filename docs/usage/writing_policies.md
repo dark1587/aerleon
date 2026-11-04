@@ -24,7 +24,7 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
 
 === "Two platforms"
 
-    A second entry under `targets:` renders the same terms for another platform, giving one output file per target: `.acl` for Cisco and `.jcl` for Juniper. Each target line is the generator name followed by that generator's options.
+    A second entry under `targets:` renders the same terms for another platform, giving one output file per target for most generators: `.acl` for Cisco and `.jcl` for Juniper. (Some generators write more than one file; `pcap`, for example, writes a separate accept and deny file.) Each target line is the generator name followed by that generator's options.
 
     ```yaml title="policies/pol/edge-inbound.yaml"
     --8<-- "docs/examples/cli/policy-two-platforms/policies/pol/edge-inbound.yaml"
@@ -75,6 +75,60 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
         ```text title="edge-inbound.jcl"
         --8<-- "docs/examples/cli/policy-separate-filters/expected/edge-inbound.jcl"
         ```
+
+## Services with more than one protocol
+
+A service such as `DNS` can span several protocols (port 53 over both `udp` and `tcp`). The term's `protocol` field decides which of the service's ports are used, so list the protocols you mean.
+
+=== "Both protocols"
+
+    `protocol: [tcp, udp]` keeps both of `DNS`'s ports. Cisco gets one line per protocol and Juniper gets one term with both protocols. The second filter shows the risk: with `protocol: udp` the term still reads as "allow DNS", but TCP 53 is dropped from the output, with no warning.
+
+    ```yaml title="def/definitions.yaml"
+    --8<-- "docs/examples/cli/multi-protocol-dns/def/definitions.yaml"
+    ```
+
+    ```yaml title="policies/pol/dns-policy.yaml"
+    --8<-- "docs/examples/cli/multi-protocol-dns/policies/pol/dns-policy.yaml"
+    ```
+
+    ??? example "Output"
+
+        ```text title="dns-policy.acl"
+        --8<-- "docs/examples/cli/multi-protocol-dns/expected/dns-policy.acl"
+        ```
+
+        ```text title="dns-policy.jcl"
+        --8<-- "docs/examples/cli/multi-protocol-dns/expected/dns-policy.jcl"
+        ```
+
+=== "GRE and HTTPS"
+
+    GRE has no ports, so it can't share a term with a service that has them. Put `gre` in one term and `tcp` with `HTTPS` in another.
+
+    ```yaml title="def/definitions.yaml"
+    --8<-- "docs/examples/cli/multi-protocol-gre/def/definitions.yaml"
+    ```
+
+    ```yaml title="policies/pol/gre-policy.yaml"
+    --8<-- "docs/examples/cli/multi-protocol-gre/policies/pol/gre-policy.yaml"
+    ```
+
+    ??? example "Output"
+
+        ```text title="gre-policy.acl"
+        --8<-- "docs/examples/cli/multi-protocol-gre/expected/gre-policy.acl"
+        ```
+
+        ```text title="gre-policy.jcl"
+        --8<-- "docs/examples/cli/multi-protocol-gre/expected/gre-policy.jcl"
+        ```
+
+The rules:
+
+- List every protocol explicitly. A term with ports and no `protocol`, or whose `protocol` has none of the service's protocols (for example `NTP`, which is `udp` only, with `protocol: tcp`), fails with `TermPortProtocolError` and `no destination ports of the correct protocol for term dns`.
+- Keep protocols with ports and protocols without ports in separate terms. `protocol: [tcp, udp, icmp]` with ports, or `protocol: [gre, tcp]` with `destination-port: HTTPS`, fails with `MixedPortandNonPortProtos` and `Term dns contains mixed uses of protocols with and without port numbers`.
+- Never list a port-based protocol without a port unless you mean any port. `protocol: [gre, tcp]` with no `destination-port` is accepted and allows all TCP to the peer: Cisco renders `permit tcp any host 192.0.2.1` and Juniper renders `protocol [ gre tcp ];`.
 
 ## Validate as you write
 

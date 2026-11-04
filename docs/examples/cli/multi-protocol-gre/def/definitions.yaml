@@ -1,0 +1,8 @@
+networks:
+  PEER:
+    values:
+      - address: 192.0.2.1/32
+services:
+  HTTPS:
+    - port: 443
+      protocol: tcp
