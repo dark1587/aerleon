@@ -21,6 +21,8 @@ hooks:
   - docs/hooks/known_docstring_warnings.py
 exclude_docs: |
   hooks/
+  examples/
+  snippets/
 extra_css:
   - css/extra.css
 extra:
@@ -44,8 +46,15 @@ markdown_extensions:
       anchor_linenums: true
   - pymdownx.details # https://squidfunk.github.io/mkdocs-material/reference/admonitions/#details
   - pymdownx.inlinehilite
-  - pymdownx.snippets
-  - pymdownx.superfences
+  - pymdownx.snippets:
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
   - toc:
       permalink: true
 plugins:
