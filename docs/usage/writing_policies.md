@@ -83,3 +83,5 @@ Point your editor at the _[JSON Schema](../reference/policy_files.md#json-schema
 ## Next
 
 _[Writing Definitions](writing_definitions.md)_: name the networks and services your terms use.
+
+_[Includes](includes.md)_: share terms and filters between policies.

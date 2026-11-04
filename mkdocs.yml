@@ -91,6 +91,7 @@ nav:
       - pol2yaml: usage/cli/pol2yaml.md
     - Writing Policies: usage/writing_policies.md
     - Writing Definitions: usage/writing_definitions.md
+    - Includes: usage/includes.md
   - API:
     - Generate API: api.md
     - AclCheck API: aclcheck_api.md
