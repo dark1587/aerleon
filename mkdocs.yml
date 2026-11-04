@@ -83,6 +83,7 @@ nav:
     - Contributing: contributing.md
     - Links: links.md
   - Usage:
+    - usage/index.md
     - Command Line Usage:
       - usage/cli/index.md
       - aclgen: usage/cli/aclgen.md

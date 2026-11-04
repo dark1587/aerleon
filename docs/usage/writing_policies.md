@@ -1,6 +1,6 @@
 # Writing Policies
 
-A policy file holds a list of `filters`. Each filter is a `header` plus `terms`: the header names the `targets` (the platforms to render for, each with its options), and the terms are the rules. See the _[Policy File Spec](../reference/policy_files.md)_ for every field, and the Usage Overview for where policy files go. This is the page that teaches `targets:` and files with more than one header.
+A policy file holds a list of `filters`. Each filter is a `header` plus `terms`: the header names the `targets` (the platforms to render for, each with its options), and the terms are the rules. See the _[Policy File Spec](../reference/policy_files.md)_ for every field, and the _[Usage Overview](index.md)_ for where policy files go. This is the page that teaches `targets:` and files with more than one header.
 
 The examples below are real files that `aclgen` runs in the docs test suite, so the output shown is exactly what you get.
 
