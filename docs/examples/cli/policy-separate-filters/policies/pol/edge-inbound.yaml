@@ -1,0 +1,25 @@
+filters:
+  - header:
+      targets:
+        cisco: edge-inbound extended
+        juniper: edge-inbound inet
+# --8<-- [start:sample-terms]
+    terms:
+      - name: allow-ssh
+        comment: "Allow SSH from the management network."
+        source-address: MGMT
+        protocol: tcp
+        destination-port: SSH
+        action: accept
+      - name: default-deny
+        action: deny
+# --8<-- [end:sample-terms]
+  - header:
+      targets:
+        cisco: edge-outbound extended
+    terms:
+      - name: deny-to-mgmt
+        destination-address: MGMT
+        action: deny
+      - name: default-accept
+        action: accept
