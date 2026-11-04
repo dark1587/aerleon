@@ -87,7 +87,7 @@ Choose `aclgen` when your policies are files in a repository and you want a comm
 
 ## Next
 
-- Policy Objects: the shape of a `PolicyDict`.
+- _[Policy Objects](policy_objects.md)_: the shape of a `PolicyDict`.
 - Definitions (Naming): build a `Naming` from files or dictionaries.
 - Multi-Platform Headers: several targets and options in one filter.
 - Includes in the API: share terms with `include_path` or `includes`.

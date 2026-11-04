@@ -1,0 +1,11 @@
+--- no filename ---
+['<unknown>.acl']
+--- filename with a directory ---
+['edge-inbound.acl']
+--- same filename twice ---
+1
+True
+--- misspelled key ---
+ permit ip any any
+--- list or string ---
+True

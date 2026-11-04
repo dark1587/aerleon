@@ -1,0 +1,16 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-policies.schema.json
+filters:
+  - header:
+      targets:
+        cisco: edge-inbound
+# --8<-- [start:sample-terms]
+    terms:
+      - name: allow-ssh
+        comment: "Allow SSH from the management network."
+        source-address: MGMT
+        protocol: tcp
+        destination-port: SSH
+        action: accept
+      - name: default-deny
+        action: deny
+# --8<-- [end:sample-terms]

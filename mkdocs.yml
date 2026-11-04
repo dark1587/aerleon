@@ -96,6 +96,7 @@ nav:
     - Includes: usage/includes.md
   - API:
     - api/index.md
+    - Policy Objects: api/policy_objects.md
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Policy File Spec: reference/policy_files.md
