@@ -9,7 +9,7 @@ One policy, which `Generate()` turns into one output file per target.
 - `filters`: a list of `PolicyFilter` dictionaries.
 - `filename` (optional): a name that decides the output file name. See _[Gotchas](#gotchas)_.
 
-Rendered in API Reference.
+Rendered in _[API Reference](reference.md#aerleon.lib.policy_builder.PolicyDict)_.
 
 ## PolicyFilter
 
@@ -18,7 +18,7 @@ One filter: a header and the terms it contains.
 - `header`: a dictionary with `targets`, a dictionary that maps a platform name to its target value, and optionally `comment`, `apply-groups` and `apply-groups-except`.
 - `terms`: a list of terms. Each entry is either a term dictionary or a `PolicyInclude`.
 
-Rendered in API Reference.
+Rendered in _[API Reference](reference.md#aerleon.lib.policy_builder.PolicyFilter)_.
 
 ## PolicyFilterTermsOnly
 
@@ -26,7 +26,7 @@ The body of an include: a dictionary with only `terms`, which is a list of term 
 
 - `terms`: a list of terms.
 
-Rendered in API Reference.
+Rendered in _[API Reference](reference.md#aerleon.lib.policy_builder.PolicyFilterTermsOnly)_.
 
 ## PolicyInclude
 
@@ -34,7 +34,7 @@ A term-list entry that pulls in the terms of an include.
 
 - `include`: the include name.
 
-Rendered in API Reference.
+Rendered in _[API Reference](reference.md#aerleon.lib.policy_builder.PolicyInclude)_.
 
 These four are `TypedDict`s. They exist for type checkers and editors only: nothing checks them when the code runs, so a wrong key or a wrong type is not reported by the dictionary itself.
 

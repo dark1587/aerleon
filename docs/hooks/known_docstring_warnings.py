@@ -9,6 +9,8 @@ docstrings and deletes this file and the ``hooks:`` line in ``mkdocs.yml``.
 import logging
 
 KNOWN: tuple[str, ...] = (
+    "aerleon/api.py:274: No type or annotation for parameter 'exp_info'",
+    "aerleon/api.py:274: Parameter 'exp_info' does not appear in the function signature",
     "aerleon/lib/naming.py:480: Failed to get 'exception: description' pair from 'service tokens.'",
 )
 

@@ -103,6 +103,7 @@ nav:
     - Includes in the API: api/includes.md
     - Best Practices: api/best_practices.md
     - AclCheck API: api/aclcheck.md
+    - API Reference: api/reference.md
   - Reference:
     - Policy File Spec: reference/policy_files.md
     - Definitions Spec: reference/definitions.md
