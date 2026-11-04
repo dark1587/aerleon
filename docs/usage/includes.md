@@ -182,4 +182,4 @@ Policies written in the older `.pol` format include other files with `#include '
 
 ## Includes in the API
 
-When you build policies from Python, pass `include_path` (a directory to read include files from) or `includes` (a dictionary mapping include names to policy dictionaries) to `Generate`. The two are mutually exclusive, and passing both raises `TypeError("include_path and includes are mutually exclusive.")`. See _[Generate API](../api.md)_.
+When you build policies from Python, pass `include_path` (a directory to read include files from) or `includes` (a dictionary mapping include names to policy dictionaries) to `Generate`. The two are mutually exclusive, and passing both raises `TypeError("include_path and includes are mutually exclusive.")`. See _[API Overview](../api/index.md)_.

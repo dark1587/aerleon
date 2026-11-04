@@ -56,5 +56,5 @@ No flags are needed: `aclgen` looks for policies in `./policies` and definitions
 - _[Writing Policies](usage/writing_policies.md)_: add more platforms and more filters.
 - _[Writing Definitions](usage/writing_definitions.md)_: more on networks and services.
 - _[Includes](usage/includes.md)_: share terms between policies.
-- _[API](api.md)_: generate policies from Python.
+- _[API](api/index.md)_: generate policies from Python.
 - _[Command Line Usage](usage/cli/index.md)_: every `aclgen` option.

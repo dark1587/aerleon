@@ -61,6 +61,7 @@ plugins:
   - search
   - mkdocs-version-annotations
   - redirects:
+      # api.md is not redirected: its old URL /api/ is served by api/index.md.
       redirect_maps:
         reference/cli.md: usage/cli/index.md
         reference/yaml_reference.md: reference/policy_files.md
@@ -94,7 +95,7 @@ nav:
     - Writing Definitions: usage/writing_definitions.md
     - Includes: usage/includes.md
   - API:
-    - Generate API: api.md
+    - api/index.md
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Policy File Spec: reference/policy_files.md

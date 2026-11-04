@@ -1,6 +1,6 @@
 """Lint tests for the hand-written usage pages under docs/.
 
-Step 3 appends "docs/api/**/*.md" to OWNED_PAGE_GLOBS.
+The API pages under docs/api/ are covered too.
 """
 
 import re
@@ -9,7 +9,11 @@ from pathlib import Path
 import pytest
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-OWNED_PAGE_GLOBS = ["docs/getting_started.md", "docs/usage/**/*.md"]
+OWNED_PAGE_GLOBS = [
+    "docs/getting_started.md",
+    "docs/usage/**/*.md",
+    "docs/api/**/*.md",
+]
 GENERATORS_PAGE = REPO_ROOT / "docs/reference/generators.md"
 MERMAID_CLASSES_REF = '--8<-- "docs/snippets/mermaid-classes.mmd"'
 

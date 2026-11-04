@@ -1,0 +1,20 @@
+['edge-inbound.acl']
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list extended edge-inbound
+ip access-list extended edge-inbound
+ remark $Id:$
+
+
+ remark allow-ssh
+ remark Allow SSH from the management network.
+ permit tcp 10.0.0.0 0.0.0.255 any eq 22
+ permit tcp 192.168.10.0 0.0.0.255 any eq 22
+
+
+ remark default-deny
+ deny ip any any
+
+exit
+
