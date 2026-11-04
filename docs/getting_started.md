@@ -17,7 +17,7 @@ The rest of this page assumes you are inside `aerleon_test`.
 
 ## Write a definitions file
 
-Definitions give names to networks and services, so policies can say `MGMT` instead of a list of addresses. Save this as `def/definitions.yaml`.
+_[Definitions](usage/writing_definitions.md)_ give names to networks and services, so policies can say `MGMT` instead of a list of addresses. Save this as `def/definitions.yaml`.
 
 ```yaml title="def/definitions.yaml"
 --8<-- "docs/examples/cli/policy-single/def/definitions.yaml"
@@ -54,7 +54,7 @@ No flags are needed: `aclgen` looks for policies in `./policies` and definitions
 ## Next steps
 
 - _[Writing Policies](usage/writing_policies.md)_: add more platforms and more filters.
-- Writing Definitions: more on networks and services.
+- _[Writing Definitions](usage/writing_definitions.md)_: more on networks and services.
 - Includes: share terms between policies.
 - _[API](api.md)_: generate policies from Python.
 - _[Command Line Usage](usage/cli/index.md)_: every `aclgen` option.

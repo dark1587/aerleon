@@ -79,3 +79,7 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
 ## Validate as you write
 
 Point your editor at the _[JSON Schema](../reference/policy_files.md#json-schema)_ for policy files to get completion and error checking while you type.
+
+## Next
+
+_[Writing Definitions](writing_definitions.md)_: name the networks and services your terms use.

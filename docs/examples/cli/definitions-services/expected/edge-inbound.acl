@@ -1,0 +1,22 @@
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list extended edge-inbound
+ip access-list extended edge-inbound
+ remark $Id:$
+
+
+ remark allow-admin
+ remark Allow SSH and HTTPS from the management network.
+ permit tcp host 10.1.1.10 any eq 22
+ permit tcp host 10.1.1.10 any eq 443
+ permit tcp host 10.1.1.11 any eq 22
+ permit tcp host 10.1.1.11 any eq 443
+ permit tcp 10.1.2.0 0.0.0.255 any eq 22
+ permit tcp 10.1.2.0 0.0.0.255 any eq 443
+
+
+ remark default-deny
+ deny ip any any
+
+exit

@@ -1,0 +1,13 @@
+filters:
+  - header:
+      targets:
+        cisco: edge-inbound extended
+    terms:
+      - name: allow-admin
+        comment: "Allow SSH and HTTPS from the management network."
+        source-address: MGMT
+        protocol: tcp
+        destination-port: ADMIN_SERVICES
+        action: accept
+      - name: default-deny
+        action: deny

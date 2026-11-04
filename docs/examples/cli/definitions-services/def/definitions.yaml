@@ -1,0 +1,16 @@
+networks:
+  MGMT:
+    values:
+      - address: 10.1.1.10/32
+      - address: 10.1.1.11/32
+      - address: 10.1.2.0/24
+services:
+  SSH:
+    - port: 22
+      protocol: tcp
+  HTTPS:
+    - port: 443
+      protocol: tcp
+  ADMIN_SERVICES:
+    - name: SSH
+    - name: HTTPS

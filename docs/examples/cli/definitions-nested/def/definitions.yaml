@@ -1,0 +1,16 @@
+networks:
+  JUMP_HOSTS:
+    values:
+      - address: 10.0.0.10/32
+      - address: 10.0.0.11/32
+  OPS_NET:
+    values:
+      - address: 192.168.10.0/24
+  MGMT:
+    values:
+      - name: JUMP_HOSTS
+      - name: OPS_NET
+services:
+  SSH:
+    - port: 22
+      protocol: tcp
