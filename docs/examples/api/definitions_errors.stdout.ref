@@ -1,0 +1,12 @@
+--- collision between two dictionaries ---
+NamespaceCollisionError: Multiple definitions found for network: MGMT
+--- collision between a file and a dictionary ---
+NamespaceCollisionError: Multiple definitions found for service: SSH
+--- undefined name, directory ---
+UndefinedAddressError: The following tokens were nested as a values, but not defined {'NOT_DEFINED': True}
+--- undefined name, single file ---
+{'NOT_DEFINED': True}
+--- undefined name, used by Generate ---
+ACLParserError
+Error parsing policy edge-inbound:
+<class 'aerleon.lib.naming.UndefinedAddressError'>UNDEFINED: NOT_DEFINED

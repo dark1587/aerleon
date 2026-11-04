@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-definitions.schema.json
+networks:
+  MGMT:
+    values:
+      - address: 10.0.0.0/24
+      - address: 192.168.10.0/24
+  RESERVED:
+    values:
+      - address: 0.0.0.0/8
+      - address: 10.0.0.0/8
+  BOGON:
+    values:
+      - address: 192.0.0.0/24
+      - address: 192.0.2.0/24

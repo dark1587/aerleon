@@ -97,6 +97,7 @@ nav:
   - API:
     - api/index.md
     - Policy Objects: api/policy_objects.md
+    - Definitions (Naming): api/definitions.md
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Policy File Spec: reference/policy_files.md

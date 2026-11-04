@@ -1,0 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-definitions.schema.json
+services:
+  SSH:
+    - port: 22
+      protocol: tcp

@@ -70,4 +70,4 @@ A token name can be defined only once, and every token a policy or another token
 
 ## From Python
 
-The API can load definitions from dicts instead of files. See the _[API](../api/index.md)_ page.
+The API can load definitions from dicts instead of files. See the _[Definitions (Naming)](../api/definitions.md)_ page.
