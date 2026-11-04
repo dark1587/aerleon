@@ -1,0 +1,8 @@
+--- a good policy ---
+['edge-inbound.acl']
+--- undefined names in the definitions ---
+ValueError: undefined names: networks={'NOT_DEFINED': True} services={}
+--- two policies with the same output name ---
+ValueError: duplicate output name: edge-inbound
+--- a policy that uses an undefined name ---
+RuntimeError: Error parsing policy bad-policy:

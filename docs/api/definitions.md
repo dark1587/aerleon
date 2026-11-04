@@ -122,4 +122,4 @@ The `def_unseen/networks.yaml` file used by two of the cases:
 --8<-- "docs/examples/api/def_unseen/networks.yaml"
 ```
 
-Best Practices shows how to turn this check into a validation step.
+_[Best Practices](best_practices.md#validate-before-generating)_ shows how to turn this check into a validation step.

@@ -84,7 +84,7 @@ These cases come from `policy_gotchas.py`. Each case prints under its own `--- <
 
 - **A missing `filename` gives `<unknown>.acl`.** Set `filename` on every policy.
 - **`filename` becomes the output name.** The directory part is dropped and the last suffix is replaced by the generator's suffix, so `"pol/edge-inbound"` and `"edge-inbound.yaml"` both give `edge-inbound.acl`.
-- **Equal output names overwrite each other, silently.** Two policies with the same `filename` and platform produce one file, and the later policy wins. In the example the result has one entry, and it holds the `second` filter. Keep names unique, as described in _Best Practices_.
+- **Equal output names overwrite each other, silently.** Two policies with the same `filename` and platform produce one file, and the later policy wins. In the example the result has one entry, and it holds the `second` filter. Keep names unique, as described in _[Best Practices](best_practices.md#use-a-unique-filename-per-policy)_.
 - **A misspelled term key is dropped.** `destination_address` is not a term keyword. It is ignored with an `Unexpected term keyword destination_address` message in the log, and the term renders as `permit ip any any`. The example prints the `permit` lines so you can see it.
 - **A list and a space-separated string are equivalent.** Both forms of `source-address` render the same ACL, as the last case shows.
 - **A target value must be a non-empty string.** An empty value is an error, not a default.

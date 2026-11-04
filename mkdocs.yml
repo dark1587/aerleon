@@ -100,6 +100,7 @@ nav:
     - Definitions (Naming): api/definitions.md
     - Multi-Platform Headers: api/multi_platform_headers.md
     - Includes in the API: api/includes.md
+    - Best Practices: api/best_practices.md
     - AclCheck API: aclcheck_api.md
   - Reference:
     - Policy File Spec: reference/policy_files.md
