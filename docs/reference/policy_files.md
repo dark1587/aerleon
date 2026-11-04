@@ -213,7 +213,7 @@ For a guide with examples, see _[Includes](../usage/includes.md)_.
 Place an item in the list of terms with the key "include" containing the path
 of the file to include, relative to the base directory. All terms found in the
 included file will be inserted into the list of terms, replacing the "include" item.
-The included file name must end in ".yaml".
+The included file name must end in ".yaml" or ".yml".
 
 ```
 # example_policy.yaml
