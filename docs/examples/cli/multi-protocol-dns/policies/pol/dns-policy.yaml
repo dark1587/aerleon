@@ -1,0 +1,23 @@
+filters:
+  - header:
+      targets:
+        cisco: dns-both extended
+        juniper: dns-both inet
+    terms:
+      - name: allow-dns
+        comment: "Allow DNS over both UDP and TCP."
+        destination-address: RESOLVERS
+        protocol: [tcp, udp]
+        destination-port: DNS
+        action: accept
+  - header:
+      targets:
+        cisco: dns-udp-only extended
+        juniper: dns-udp-only inet
+    terms:
+      - name: allow-dns-udp
+        comment: "Listing only udp silently drops TCP 53."
+        destination-address: RESOLVERS
+        protocol: udp
+        destination-port: DNS
+        action: accept

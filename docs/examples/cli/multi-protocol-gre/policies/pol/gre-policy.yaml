@@ -1,0 +1,17 @@
+filters:
+  - header:
+      targets:
+        cisco: gre-https extended
+        juniper: gre-https inet
+    terms:
+      - name: allow-gre
+        comment: "GRE has no ports, so it gets its own term."
+        destination-address: PEER
+        protocol: gre
+        action: accept
+      - name: allow-https
+        comment: "HTTPS to the same peer."
+        destination-address: PEER
+        protocol: tcp
+        destination-port: HTTPS
+        action: accept

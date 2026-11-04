@@ -1,0 +1,10 @@
+networks:
+  RESOLVERS:
+    values:
+      - address: 10.0.0.53/32
+services:
+  DNS:
+    - port: 53
+      protocol: udp
+    - port: 53
+      protocol: tcp

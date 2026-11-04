@@ -1,0 +1,25 @@
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list extended dns-both
+ip access-list extended dns-both
+ remark $Id:$
+
+
+ remark allow-dns
+ remark Allow DNS over both UDP and TCP.
+ permit tcp any host 10.0.0.53 eq 53
+ permit udp any host 10.0.0.53 eq 53
+
+exit
+
+no ip access-list extended dns-udp-only
+ip access-list extended dns-udp-only
+ remark $Id:$
+
+
+ remark allow-dns-udp
+ remark Listing only udp silently drops TCP 53.
+ permit udp any host 10.0.0.53 eq 53
+
+exit
