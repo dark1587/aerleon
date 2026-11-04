@@ -64,7 +64,7 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
 
 A token name can be defined only once, and every token a policy or another token refers to must be defined. These are the errors you see when that isn't so.
 
-- `Multiple definitions found for network: MGMT`: the token `MGMT` is defined twice. The second definition can be in the same file or in a different file in the definitions directory; both count, and `aclgen` stops.
+- `Multiple definitions found for network: MGMT`: the token `MGMT` is defined in two different files in the definitions directory, and `aclgen` stops. Repeating a key twice inside one file does not raise this error: YAML keeps the later one and silently drops the earlier, so keep each token in one place.
 - `The following tokens were nested as a values, but not defined {'JUMP_HOSTS': True}`: a token lists `- name: JUMP_HOSTS` under `values`, but no token with that name exists.
 - `Error parsing policy file …` with `UNDEFINED: NOPE`: a policy uses the token `NOPE`, which no definitions file defines.
 
