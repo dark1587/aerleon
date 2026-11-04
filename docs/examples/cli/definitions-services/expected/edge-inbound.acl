@@ -8,12 +8,12 @@ ip access-list extended edge-inbound
 
  remark allow-admin
  remark Allow SSH and HTTPS from the management network.
- permit tcp host 10.1.1.10 any eq 22
- permit tcp host 10.1.1.10 any eq 443
- permit tcp host 10.1.1.11 any eq 22
- permit tcp host 10.1.1.11 any eq 443
- permit tcp 10.1.2.0 0.0.0.255 any eq 22
- permit tcp 10.1.2.0 0.0.0.255 any eq 443
+ permit tcp host 10.0.0.10 any eq 22
+ permit tcp host 10.0.0.10 any eq 443
+ permit tcp host 10.0.0.11 any eq 22
+ permit tcp host 10.0.0.11 any eq 443
+ permit tcp 192.168.10.0 0.0.0.255 any eq 22
+ permit tcp 192.168.10.0 0.0.0.255 any eq 443
 
 
  remark default-deny
