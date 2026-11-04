@@ -1,0 +1,14 @@
+filters_include_only:
+  - header:
+      targets:
+        cisco: mgmt-inbound extended
+        juniper: mgmt-inbound inet
+    terms:
+      - name: allow-ssh
+        comment: "Allow SSH from the management network."
+        source-address: MGMT
+        protocol: tcp
+        destination-port: SSH
+        action: accept
+      - name: default-deny
+        action: deny

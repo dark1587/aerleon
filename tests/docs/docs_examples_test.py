@@ -17,6 +17,7 @@ import sys
 from pathlib import Path
 
 import pytest
+import yaml
 
 from aerleon import aclgen
 from aerleon.utils import config
@@ -150,4 +151,28 @@ def test_api_example(name):
         run_api_example(API_EXAMPLES_DIR / f"{name}.py"),
         API_EXAMPLES_DIR / f"{name}.stdout.ref",
         update=updating(),
+    )
+
+
+def policy_files_in_pol_dirs() -> list[Path]:
+    if not CLI_EXAMPLES_DIR.is_dir():
+        return []
+    return sorted(
+        p
+        for pattern in ("*.yaml", "*.yml")
+        for p in CLI_EXAMPLES_DIR.glob(f"*/policies/**/pol/{pattern}")
+    )
+
+
+@pytest.mark.parametrize(
+    "path",
+    policy_files_in_pol_dirs(),
+    ids=lambda p: p.relative_to(CLI_EXAMPLES_DIR).as_posix(),
+)
+def test_examples_keep_includes_out_of_pol(path):
+    """aclgen crashes on a terms-only file in a pol/ directory, so includes live elsewhere."""
+    data = yaml.safe_load(path.read_text(encoding="utf-8"))
+    assert isinstance(data, dict) and "filters" in data, (
+        f"{path}: files in pol/ need a top-level 'filters' key; "
+        "put include files under policies/includes/"
     )

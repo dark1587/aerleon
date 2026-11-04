@@ -1,0 +1,5 @@
+terms:
+  - name: deny-reserved
+    comment: "Deny reserved ranges."
+    source-address: RESERVED
+    action: deny

@@ -1,0 +1,46 @@
+! $Id:$
+! $Date:$
+! $Revision:$
+no ip access-list extended mgmt-inbound
+ip access-list extended mgmt-inbound
+ remark $Id:$
+
+
+ remark allow-ssh
+ remark Allow SSH from the management network.
+ permit tcp 10.0.0.0 0.0.0.255 any eq 22
+ permit tcp 192.168.10.0 0.0.0.255 any eq 22
+
+
+ remark default-deny
+ deny ip any any
+
+exit
+
+no ip access-list extended edge-inbound
+ip access-list extended edge-inbound
+ remark $Id:$
+
+
+ remark allow-ssh
+ remark Allow SSH from the management network.
+ permit tcp 10.0.0.0 0.0.0.255 any eq 22
+ permit tcp 192.168.10.0 0.0.0.255 any eq 22
+
+
+ remark deny-reserved
+ remark Deny reserved ranges.
+ deny ip 0.0.0.0 0.255.255.255 any
+ deny ip 240.0.0.0 15.255.255.255 any
+
+
+ remark deny-bogons
+ remark Deny bogon ranges.
+ deny ip 192.0.0.0 0.0.0.255 any
+ deny ip 192.0.2.0 0.0.0.255 any
+
+
+ remark default-deny
+ deny ip any any
+
+exit

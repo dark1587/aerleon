@@ -1,0 +1,17 @@
+networks:
+  MGMT:
+    values:
+      - address: 10.0.0.0/24
+      - address: 192.168.10.0/24
+  RESERVED:
+    values:
+      - address: 0.0.0.0/8
+      - address: 240.0.0.0/4
+  BOGON:
+    values:
+      - address: 192.0.0.0/24
+      - address: 192.0.2.0/24
+services:
+  SSH:
+    - port: 22
+      protocol: tcp

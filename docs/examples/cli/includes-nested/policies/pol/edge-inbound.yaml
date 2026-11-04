@@ -1,0 +1,14 @@
+filters:
+  - header:
+      targets:
+        cisco: edge-inbound extended
+        juniper: edge-inbound inet
+    terms:
+      - name: allow-ssh
+        comment: "Allow SSH from the management network."
+        source-address: MGMT
+        protocol: tcp
+        destination-port: SSH
+        action: accept
+      - include: includes/bogons.yaml
+      - include: includes/default-deny.yaml

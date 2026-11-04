@@ -1,0 +1,9 @@
+terms:
+  - name: deny-reserved
+    comment: "Deny reserved ranges."
+    source-address: RESERVED
+    action: deny
+  - name: deny-bogons
+    comment: "Deny bogon ranges."
+    source-address: BOGON
+    action: deny
