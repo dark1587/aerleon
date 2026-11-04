@@ -1,6 +1,6 @@
 # Multi-Platform Headers
 
-One policy can generate ACLs for several platforms at once. The `targets` dictionary in a filter header maps each platform name to a target value, and `Generate()` renders one output file for each entry. This page shows how to use one filter for several platforms, how to pass options to each platform, and when to use separate filters instead. For the header fields, see _[Policy File Spec](../reference/policy_files.md)_.
+One policy can generate ACLs for several platforms at once. The `targets` dictionary in a filter header maps each platform name to a target value, and `Generate()` renders one output file for each entry. The exception is `pcap`, which writes two files, such as `p-accept.pcap` and `p-deny.pcap`. This page shows how to use one filter for several platforms, how to pass options to each platform, and when to use separate filters instead. For the header fields, see _[Policy File Spec](../reference/policy_files.md)_.
 
 Examples run from `docs/examples/api/`, because they load definitions with the relative path `def/`. Run them from that directory if you try them yourself.
 

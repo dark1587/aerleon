@@ -93,4 +93,5 @@ Choose `aclgen` when your policies are files in a repository and you want a comm
 - _[Includes in the API](includes.md)_: share terms with `include_path` or `includes`.
 - _[Best Practices](best_practices.md)_: validate input and choose an output mode.
 - _[AclCheck API](aclcheck.md)_: decide how a policy treats a packet.
+- _[API Reference](reference.md)_: signatures and docstrings generated from the code.
 - _[Includes](../usage/includes.md)_: the same feature for YAML files.

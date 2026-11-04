@@ -43,7 +43,7 @@ Both examples print the same ACL. The two deny terms from the include come first
 - **Filter includes work only with `include_path`.** A whole-filter include, which uses `filters_include_only` in the file, cannot be supplied through the `includes` dictionary. Aerleon does not report this clearly: the call fails with an `AttributeError` instead of a message about includes. Use `include_path` for filter includes.
 - **Nesting is limited to 5 levels.** An included file can include other files, up to five levels deep. Deeper nesting is an error.
 - **The two arguments are mutually exclusive.** Passing a non-empty `include_path` and a non-empty `includes` together raises a `TypeError`.
-- **Include terms need one of the two arguments.** If a policy contains an `include` term and you pass neither argument, the call fails. See _[Policy Objects](policy_objects.md)_.
+- **Include terms need one of the two arguments.** If a policy contains an `include` term and you pass neither argument, the call crashes with `KeyError: 'name'`. See _[Policy Objects](policy_objects.md)_.
 
 ## Errors
 

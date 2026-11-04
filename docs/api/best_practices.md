@@ -6,7 +6,7 @@ Examples run from `docs/examples/api/`, because they load definitions with the r
 
 ## Validate before generating
 
-Two mistakes pass through `Generate()` without an error, so check for them yourself.
+Two mistakes can pass through `Generate()` without an error, so check for them yourself.
 
 The first is an undefined name that a definition refers to. A `Naming` built from a dictionary or a single file keeps such names in `unseen_networks` and `unseen_services`, and only fails later when something uses them. Raise an error as soon as either one is not empty. _[Definitions (Naming)](definitions.md#checking-for-undefined-names)_ explains where the check applies.
 
@@ -52,7 +52,7 @@ The repository ships two schemas, `schemas/aerleon-policies.schema.json` and `sc
 # yaml-language-server: $schema=https://raw.githubusercontent.com/aerleon/aerleon/main/schemas/aerleon-policies.schema.json
 ```
 
-Use `aerleon-definitions.schema.json` for definitions files. The fields are described in _[Policy File Spec](../reference/policy_files.md)_.
+Use `aerleon-definitions.schema.json` for definitions files. The fields are described in _[Policy File Spec](../reference/policy_files.md)_. For the schemas themselves, see _[JSON Schema](../reference/policy_files.md#json-schema)_.
 
 ## Returned strings or output_directory
 

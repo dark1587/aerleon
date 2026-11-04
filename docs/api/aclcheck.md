@@ -2,7 +2,7 @@
 
 `AclCheck()` answers one question: what does a policy do with a given packet? You give it a policy, the definitions the policy refers to, and the packet's addresses, ports and protocol. It returns the terms that match. It is the Python counterpart of the `aclcheck` command, described in _[aclcheck](../usage/cli/aclcheck.md)_.
 
-Examples run from `docs/examples/api/`, because they load their files by relative paths. Run them from that directory if you try them yourself.
+Examples run from `docs/examples/api/`, because the test harness runs every example from that directory. Run them from that directory if you try them yourself.
 
 ## Example
 
@@ -31,7 +31,7 @@ The example checks a packet from `192.168.1.0/24` to `10.0.0.10`, TCP, source po
 
 A `None` for `src`, `dst`, `sport`, `dport` or `proto` is treated as `"any"`.
 
-Even though the check does not depend on the platform, the policy must have at least one target in every filter header, as `Generate()` requires. A header without one fails with an error. The first target's filter name is the key you will see in the summary, so `AclCheck()` reports a filter once, even when the header lists several platforms.
+Even though the check does not depend on the platform, the policy must have at least one target in every filter header. `AclCheck()` fails on a header without one (see _[Errors](#errors-and-limits)_ below), while `Generate()` silently renders nothing for it. The first target's filter name is the key you will see in the summary, so `AclCheck()` reports a filter once, even when the header lists several platforms.
 
 ## Reading the summary
 

@@ -4,7 +4,7 @@
 
 ## PolicyDict
 
-One policy, which `Generate()` turns into one output file per target.
+One policy, which `Generate()` turns into one output file per target. The exception is `pcap`, which writes two files, such as `p-accept.pcap` and `p-deny.pcap`.
 
 - `filters`: a list of `PolicyFilter` dictionaries.
 - `filename` (optional): a name that decides the output file name. See _[Gotchas](#gotchas)_.
@@ -87,5 +87,6 @@ These cases come from `policy_gotchas.py`. Each case prints under its own `--- <
 - **Equal output names overwrite each other, silently.** Two policies with the same `filename` and platform produce one file, and the later policy wins. In the example the result has one entry, and it holds the `second` filter. Keep names unique, as described in _[Best Practices](best_practices.md#use-a-unique-filename-per-policy)_.
 - **A misspelled term key is dropped.** `destination_address` is not a term keyword. It is ignored with an `Unexpected term keyword destination_address` message in the log, and the term renders as `permit ip any any`. The example prints the `permit` lines so you can see it.
 - **A list and a space-separated string are equivalent.** Both forms of `source-address` render the same ACL, as the last case shows.
-- **A target value must be a non-empty string.** An empty value is an error, not a default.
-- **An `include` term needs a source.** A `{"include": ...}` term only works if you pass `include_path` or `includes` to `Generate()`. Without either, it fails. See _[Includes in the API](includes.md)_.
+- **A target value must be a non-empty string.** An empty value is not a default: `{"cisco": ""}` crashes with an `AttributeError`.
+- **An unknown platform name is skipped.** A name in `targets` that is not a platform, such as the typo `"cicso"`, only logs `No generator found for target "cicso", skipping target.` and renders nothing. If no target is valid, or `targets` is empty, `Generate()` returns an empty dictionary. Check the keys of the result.
+- **An `include` term needs a source.** A `{"include": ...}` term only works if you pass `include_path` or `includes` to `Generate()`. Without either, it fails with `KeyError: 'name'`. See _[Includes in the API](includes.md)_.
