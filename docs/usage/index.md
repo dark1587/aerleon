@@ -42,7 +42,7 @@ By default `aclgen` reads policies from `./policies` and definitions from `./def
 
 ## Where output goes
 
-Each output file is written to the output directory, then the path of the `pol` directory's parent relative to the policies directory, then the policy file name without its extension plus the generator's suffix. The output directory is `./` unless you set `--output_directory`. For example, `policies/site-a/pol/core.yaml` becomes `out/site-a/core.acl` for the Cisco target and `out/site-a/core.jcl` for the Juniper target. See _[Generators](../reference/generators.md)_ for each platform's suffix.
+Each output file is written to the output directory, then the path of the `pol` directory's parent relative to the policies directory, then the policy file name without its extension plus the generator's suffix. The output directory is `./` unless you set `--output_directory`. For example, `policies/site-a/pol/core.yaml` becomes, with `--output_directory out`, `out/site-a/core.acl` for the Cisco target and `out/site-a/core.jcl` for the Juniper target. See _[Generators](../reference/generators.md)_ for each platform's suffix.
 
 ## Include files
 
