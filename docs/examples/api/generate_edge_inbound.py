@@ -1,4 +1,4 @@
-"""Generate Cisco and Juniper ACLs for edge-inbound from Python dicts."""
+"""Generate a Cisco ACL for edge-inbound from Python dicts."""
 
 from aerleon import api
 from aerleon.lib import naming

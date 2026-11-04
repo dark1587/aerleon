@@ -27,6 +27,8 @@ flowchart LR
     --8<-- "docs/snippets/mermaid-classes.mmd"
 ```
 
+A policy with both Cisco and Juniper targets returns the `.jcl` file as well as the `.acl` file; the Quick start below uses Cisco only.
+
 You build the policy dictionaries and the definitions yourself. Definitions go into a `Naming` object. `Generate()` returns a dictionary that maps each output file name to its text. If you pass `output_directory`, it writes the files there instead.
 
 ## Quick start
