@@ -1,0 +1,7 @@
+{'src': '10.0.0.5', 'dst': '203.0.113.10', 'sport': 40000, 'dport': 22, 'proto': 'tcp'}
+{'edge-inbound': {'allow-established': {'possibles': ['tcp-est'], 'message': "          term: allow-established (possible match)\n                accept if ['tcp-est']"}, 'allow-ssh': {'possibles': [], 'message': '          term: allow-ssh\n                accept'}}}
+accept if ['tcp-est']; accept
+{'src': '198.51.100.1', 'dport': 22, 'proto': 'tcp'}
+{'edge-inbound': {'allow-established': {'possibles': ['tcp-est'], 'message': "          term: allow-established (possible match)\n                accept if ['tcp-est']"}, 'default-deny': {'possibles': [], 'message': '          term: default-deny\n                deny'}}}
+accept if ['tcp-est']; deny
+BadPortValue: port SSH is not valid.

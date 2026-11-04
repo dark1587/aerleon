@@ -94,4 +94,4 @@ This checks the `sample_cisco_lab_yaml.yaml` policy, using definitions from the 
                 deny
 ```
 
-To call AclCheck from Python, see _[AclCheck API](../../aclcheck_api.md)_.
+To call AclCheck from Python, see _[AclCheck API](../../api/aclcheck.md)_.

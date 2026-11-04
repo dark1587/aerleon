@@ -67,6 +67,7 @@ plugins:
         reference/yaml_reference.md: reference/policy_files.md
         reference/naming.md: reference/definitions.md
         aclcheck.md: usage/cli/aclcheck.md
+        aclcheck_api.md: api/aclcheck.md
   - mkdocstrings:
       default_handler: python
       handlers:
@@ -101,7 +102,7 @@ nav:
     - Multi-Platform Headers: api/multi_platform_headers.md
     - Includes in the API: api/includes.md
     - Best Practices: api/best_practices.md
-    - AclCheck API: aclcheck_api.md
+    - AclCheck API: api/aclcheck.md
   - Reference:
     - Policy File Spec: reference/policy_files.md
     - Definitions Spec: reference/definitions.md

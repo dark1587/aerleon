@@ -92,5 +92,5 @@ Choose `aclgen` when your policies are files in a repository and you want a comm
 - _[Multi-Platform Headers](multi_platform_headers.md)_: several targets and options in one filter.
 - _[Includes in the API](includes.md)_: share terms with `include_path` or `includes`.
 - _[Best Practices](best_practices.md)_: validate input and choose an output mode.
-- AclCheck API: decide how a policy treats a packet.
+- _[AclCheck API](aclcheck.md)_: decide how a policy treats a packet.
 - _[Includes](../usage/includes.md)_: the same feature for YAML files.
