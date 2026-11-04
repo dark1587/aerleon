@@ -89,6 +89,7 @@ nav:
       - aclcheck: usage/cli/aclcheck.md
       - cgrep: usage/cli/cgrep.md
       - pol2yaml: usage/cli/pol2yaml.md
+    - Writing Policies: usage/writing_policies.md
   - API:
     - Generate API: api.md
     - AclCheck API: aclcheck_api.md
