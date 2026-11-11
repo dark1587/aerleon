@@ -28,7 +28,9 @@ runs:
     - name: Install Poetry
       shell: bash
       run: |
-        pipx install poetry --python "${{ steps.setup-python.outputs.python-path }}"
+        # pipx runs on the runner's own (GIL) Python, which aborts when the
+        # free-threaded jobs' PYTHON_GIL=0 is set, so unset it for pipx only.
+        env -u PYTHON_GIL pipx install poetry --python "${{ steps.setup-python.outputs.python-path }}"
         poetry config virtualenvs.create true
         poetry config virtualenvs.in-project true
     #----------------------------------------------
