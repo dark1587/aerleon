@@ -126,6 +126,8 @@ Each policy file renders to one file with the same name and **no extension**, so
 
 ## Known Issues
 
+<!-- --8<-- [start:known-issues] -->
 !!! bug "Known issues"
     * **Header options leak between filters.** `nostate`, `noverbose`, `nochainedterms` and the default policy aren't reset between headers. If a policy has several Iptables filters, later filters inherit these settings from earlier ones.
     * **`log-limit` renders invalid syntax.** The log rule is rendered as `-m --limit 10/minute …`, which iptables rejects. It should be `-m limit --limit 10/minute …`.
+<!-- --8<-- [end:known-issues] -->
