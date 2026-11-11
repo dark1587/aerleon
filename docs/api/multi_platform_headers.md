@@ -40,7 +40,7 @@ The policy's `filename` is `edge-inbound`, and each platform adds its own suffix
 
 The value of a target is a string of the form `<filter-name> <options>`. The first word is the filter name. Everything after it is a list of options for that platform, and each platform defines its own. The Header Format section of each platform's page in _[Generators](../reference/generators.md)_ lists them.
 
-Here Cisco gets `mixed`, which renders both an IPv4 and an IPv6 access list in the same file. Juniper gets `inet not-interface-specific`, which renders an IPv4 filter and leaves out the `interface-specific` statement.
+Here _[Cisco](../reference/generators/cisco.md)_ gets `mixed`, which renders both an IPv4 and an IPv6 access list in the same file. _[Juniper](../reference/generators/juniper.md)_ gets `inet not-interface-specific`, which renders an IPv4 filter and leaves out the `interface-specific` statement.
 
 ```python title="multi_platform_options.py"
 --8<-- "docs/examples/api/multi_platform_options.py"
