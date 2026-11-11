@@ -6,7 +6,7 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
 
 === "Single platform"
 
-    One target, one output file. The output is named after the policy file (`edge-inbound.yaml`) plus the generator's suffix, here `.acl` for Cisco. See _[Generators](../reference/generators.md)_ for each generator's suffix. This tab also shows the definitions file the policy refers to.
+    One target, one output file. The output is named after the policy file (`edge-inbound.yaml`) plus the generator's suffix, here `.acl` for Cisco. See the File suffix column in the _[Generators Overview](../reference/generators.md#generators)_ for each generator's suffix. This tab also shows the definitions file the policy refers to.
 
     ```yaml title="def/definitions.yaml"
     --8<-- "docs/examples/cli/policy-single/def/definitions.yaml"
@@ -42,7 +42,7 @@ The examples below are real files that `aclgen` runs in the docs test suite, so 
 
 === "Per-platform options"
 
-    Options on a target line belong to that target alone. Here `noverbose` on the Juniper target drops the term comment from the `.jcl` file only; the `.acl` file still carries it. See _[Generators](../reference/generators.md)_ for the options each generator accepts.
+    Options on a target line belong to that target alone. Here `noverbose` on the Juniper target drops the term comment from the `.jcl` file only; the `.acl` file still carries it. See the _[Juniper](../reference/generators/juniper.md)_ and _[Cisco](../reference/generators/cisco.md)_ pages for the options each generator accepts.
 
     ```yaml title="policies/pol/edge-inbound.yaml"
     --8<-- "docs/examples/cli/policy-platform-options/policies/pol/edge-inbound.yaml"

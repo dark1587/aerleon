@@ -228,17 +228,10 @@ def _example_yaml_with_markers() -> list[Path]:
 
 
 _GENERATORS_TERMS = _between_markers(GENERATORS_PAGE.read_text())
-_DRIFT_MARKS = (
-    (pytest.mark.xfail(strict=True, reason="needs #513"),)
-    if _GENERATORS_TERMS is None
-    else ()
-)
-
-
 @pytest.mark.parametrize(
     "path",
     [
-        pytest.param(p, id=_page_id(p), marks=_DRIFT_MARKS)
+        pytest.param(p, id=_page_id(p))
         for p in _example_yaml_with_markers()
     ],
 )
