@@ -27,7 +27,7 @@ filters:
       - ...
 ```
 
-Policy files can be validated against a JSON Schema. See _[JSON Schema](yaml_reference.md#json-schema)_.
+Policy files can be validated against a JSON Schema. See _[JSON Schema](policy_files.md#json-schema)_.
 
 Each generator has its own page with:
 
