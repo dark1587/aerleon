@@ -11,21 +11,7 @@ filters:
       - ...
 ```
 
-An Aerleon policy can contain multiple headers, allowing for multiple policies across multiple platforms to be supported in a single policy file:
-
-```yaml
-filters:
-  - header:
-      targets:
-        juniper: edge-inbound inet
-    terms:
-      - ...
-  - header:
-      targets:
-        cisco: edge-inbound extended
-    terms:
-      - ...
-```
+To target several platforms, see _[Writing Policies](../usage/writing_policies.md)_.
 
 Policy files can be validated against a JSON Schema. See _[JSON Schema](policy_files.md#json-schema)_.
 
