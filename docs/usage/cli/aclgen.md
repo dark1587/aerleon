@@ -44,7 +44,7 @@ policies/
 
 ## Output file naming
 
-Each output file is written to `output_directory`, then the path of the `pol` directory's parent relative to `base_directory`, then the policy file name without its extension plus the generator's suffix. For example, `policies/site-a/pol/core.yaml` becomes `out/site-a/core.acl` for the Cisco target and `out/site-a/core.jcl` for the Juniper target.
+Each output file is written to `output_directory`, then the path of the `pol` directory's parent relative to `base_directory`, then the policy file name without its extension plus the generator's suffix (see the File suffix column in the _[Generators Overview](../../reference/generators.md#generators)_). For example, `policies/site-a/pol/core.yaml` becomes `out/site-a/core.acl` for the Cisco target and `out/site-a/core.jcl` for the Juniper target.
 
 !!! note
     A file given with `--policy_file` follows the same rule, so it must be under `base_directory`.
