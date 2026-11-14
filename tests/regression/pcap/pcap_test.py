@@ -512,7 +512,8 @@ class PcapFilter(absltest.TestCase):
     def testDirectional(self):
         acl = pcap.PcapFilter(
             policy.ParsePolicy(
-                GOOD_HEADER_IN + GOOD_TERM_PROTO_TCP + GOOD_HEADER_OUT + GOOD_TERM_ICMP, self.naming
+                GOOD_HEADER_IN + GOOD_TERM_PROTO_TCP + GOOD_HEADER_OUT + GOOD_TERM_ICMP,
+                self.naming,
             ),
             EXP_INFO,
         )
