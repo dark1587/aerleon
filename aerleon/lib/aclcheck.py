@@ -20,9 +20,7 @@ import logging
 from collections import defaultdict
 from collections.abc import Collection, Sequence
 from ipaddress import IPv4Address, IPv4Network, IPv6Address, IPv6Network
-from typing import Final, Literal, TypeAlias, TypedDict
-
-from typing_extensions import Self
+from typing import Final, Literal, Self, TypeAlias, TypedDict
 
 from aerleon.lib import nacaddr, naming, policy, policy_builder, port
 
