@@ -228,6 +228,20 @@ term accept-prod-except-mgmt {
 }
 """
 
+GOOD_HEADER_INET6 = """
+header {
+  target:: pcap test-filter inet6
+}
+"""
+
+SYN_OPTION_TERM = """
+term accept-syn {
+  protocol:: tcp
+  option:: syn
+  action:: accept
+}
+"""
+
 ESTABLISHED_OPTION_TERM = """
 term accept-established {
   protocol:: tcp
@@ -597,6 +611,23 @@ class PcapFilter(absltest.TestCase):
             '(tcp[tcpflags] & (tcp-ack) == (tcp-ack))',
             self._Render(GOOD_HEADER + ESTABLISHED_OPTION_TERM),
         )
+
+    def testTcpFlagOption(self):
+        self.assertIn(
+            '(tcp[tcpflags] & (tcp-syn) == (tcp-syn))',
+            self._Render(GOOD_HEADER + SYN_OPTION_TERM),
+        )
+
+    def testTermOutsideAddressFamilyIgnored(self):
+        # deny-prod-tcp has only IPv4 sources, so it is dropped from the inet6
+        # filter and does not shadow the accept term after it.
+        self.assertEqual(
+            self._Render(GOOD_HEADER_INET6 + DENY_PROD_TCP_TERM + ACCEPT_SMTP_TERM),
+            '((proto \\tcp) and (dst port 25))\n',
+        )
+
+    def testMatchEverythingTermMatchesAllPackets(self):
+        self.assertEqual(self._Render(GOOD_HEADER + DEFAULT_DENY_TERM, invert=True), '\n')
 
     def testDirectionDoesNotLeakIntoNextFilter(self):
         result = self._Render(GOOD_HEADER_IN + GOOD_TERM_PROTO_TCP + GOOD_HEADER + GOOD_TERM_ICMP)
