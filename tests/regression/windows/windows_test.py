@@ -32,6 +32,12 @@ header {
 }
 """
 
+UNSUPPORTED_OPTION_HEADER = """
+header {
+  target:: windows test-filter bogus
+}
+"""
+
 MULTIPLE_PROTOCOLS_TERM = """
 term multi-proto {
   protocol:: tcp udp icmp
@@ -199,6 +205,17 @@ class WindowsGeneratorTest(absltest.TestCase):
         ):
             windows.WindowsGenerator(
                 policy.ParsePolicy(DEFAULT_ACTION_HEADER + MULTIPLE_PROTOCOLS_TERM, self.naming),
+                EXP_INFO,
+            )
+
+    def testUnsupportedHeaderOptionRejected(self):
+        with self.assertRaisesRegex(
+            aclgenerator.UnsupportedTargetOptionError, 'Unsupported option found in.*bogus'
+        ):
+            windows.WindowsGenerator(
+                policy.ParsePolicy(
+                    UNSUPPORTED_OPTION_HEADER + MULTIPLE_PROTOCOLS_TERM, self.naming
+                ),
                 EXP_INFO,
             )
 
